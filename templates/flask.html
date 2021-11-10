@@ -1,0 +1,43 @@
+{% extends 'basis.html'%} {% block title%}
+<title>flask</title>
+{%endblock%} {%block body%}
+<!-- <p class="pre">
+  There are two ways data is received from the server.One through query string
+  and other through form data. Query string
+</p> -->
+<p class="pre">Flask is imported and routes are defined in flask in the following way:</p>
+<pre><code lang="python">
+from flask import Flask
+
+app = Flask(__name__)
+
+
+@app.route('/')
+def home():
+    return 'Hello World!'
+
+if __name__ =="__main__":  
+    app.run(debug = True)  
+</code></pre>
+<p class="pre">"if __name__ =="__main__": " line makes sure that that the app keeps on running and changing as we change our code.It will trace errors and display it.Each time a change is made, you would have to restart the app to be able to view the change, in order to avoid that, the app can be started in debugging mode where the changes will reflect instantaneously.  </p>
+<p>
+    <table>
+        <tr>
+            <th>request</th>
+            <th>purpose</th>
+        </tr>
+        <tr>
+            <td>GET</td>
+            <td>GET METHOD sends request to the server and displays the result.Any time you have a route with an unspecified method, Flask assumes the method is GET (that the client is requesting data from the server).</td>
+        </tr>
+        
+        <tr>
+            <td>POST</td>
+            <td>POST METHOD sends request to the server with the data it has collected from the form and receives updated result.</td>
+        </tr>
+    </table>
+</p>
+<p class="pre">In the route we can directly declare what we want to do with METHOD variable.To handle both GET and POST requests, we add that in the decorator app.route() method.Whatever request you want, you change it in the decorator.</p>
+<pre><code lang="python">@app.route('/login',methods = ['POST', 'GET'])</code></pre>
+<p class="pre">we can see the posted data  of the form in the network section of inspect section of browser developer's tool.
+{%endblock%}

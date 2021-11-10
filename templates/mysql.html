@@ -1,0 +1,294 @@
+{% extends 'basis.html' %}
+{% block title %}
+<title>mysql</title>
+{% endblock %}
+{% block body %}
+<!-- <p><a href="http://127.0.0.1:8080/" id ="toTheRight">Back to contents</a></p> -->
+<p class="pre">Here’s the command to start the console, logging in as the MySQL database administrator (which uses the root user ID):</p>
+<pre><code lang="python">mysql -u root -p</code></pre>
+<p class="pre">Here’s the console command that creates our database:
+    <pre><code lang ="python">mysql> create database vsearchlogDB;</code></pre>
+</p>
+<p class="pre">Here’s the SQL statement we used to create the required table (called log).
+    <pre><code>mysql> create table log</code></pre>
+    </p>
+<p class="pre">    
+    This next command creates a new MySQL user called vsearch, uses “vsearchpasswd” as the new user’s password, and gives the vsearch user full rights to the vsearchlogDB database:
+    </p>
+    <pre><code lang="python">CREATE USER 'newuser'@'localhost' IDENTIFIED BY 'password';
+GRANT ALL PRIVILEGES ON * . * TO 'newuser'@'localhost';</code></pre>
+<p class="pre">The asterisks in this command refer to the database and table (respectively) that they can access.</p>
+<p class="pre">Once you have finalized the permissions that you want to set up for your new users, always be sure to reload all the privileges.</p>
+<pre><code lang="python">FLUSH PRIVILEGES;</code></pre>
+<p class="pre">
+    To provide a specific user with a permission, you can use this framework:
+
+<pre><code lang ="python">GRANT type_of_permission ON database_name.table_name TO 'username'@'localhost';</code></pre>
+ 
+<p class="pre">If you want to give them access to any database or to any table, make sure to put an asterisk (*) in the place of the database name or table name.
+
+Each time you update or change a permission be sure to use the Flush Privileges command.
+
+If you need to revoke a permission, the structure is almost identical to granting it:</p>
+
+<pre><code lang ="python">REVOKE type_of_permission ON database_name.table_name FROM 'username'@'localhost';</code></pre>
+ 
+<p class="pre">Note that when revoking permissions, <b>the syntax requires that you use FROM, instead of TO </b>as we used when granting permissions.
+
+You can review a user’s current permissions by running the following:</p>
+
+<pre><code>SHOW GRANTS FOR 'username'@'localhost';</code></pre>
+<p class="pre"> 
+Just as you can delete databases with DROP, you can use DROP to delete a user altogether:</p>
+
+<pre><code lang ="python">DROP USER 'username'@'localhost';</code></pre>
+</p>
+<p class="pre">The simplest thing is to cancel the query. However, you cannot just type \c in this case, because mysql interprets it as part of the string that it is collecting. Instead, enter the closing quote character (so mysql knows you've finished the string), then type \c:
+    <pre><code>mysql> SELECT * FROM my_table WHERE name = 'Smith AND age < 30;
+        '> '\c</code></pre></p>
+    <P class="pre">The prompt changes back to mysql>, indicating that mysql is ready for a new query.
+    The `> prompt is similar to the '> and "> prompts, but indicates that you have begun but not completed a back-tick-quoted identifier.It is important to know what the '>, ">, and `> prompts signify, because if you mistakenly enter an unterminated string, any further lines you type appear to be ignored by mysql—including a line containing QUIT. This can be quite confusing, especially if you do not know that you need to supply the terminating quote before you can cancel the current query.</p>
+<pre><code lang = "python">
+    show databases; You can check the available databases 
+    create database [db_name];
+    use [db_name]; start using the database
+    drop database [db_name]
+    
+    create table [table_name] (col1 , col2, col3 , col4......);
+    eg user
+    
+    show tables;
+    desc [tb_name]; it describes the table.
+    drop table [table_name];
+    
+    alter table [old table name] rename to [new name];
+    truncate table [table_name];
+    
+    insert into [table_name](id,name,city) values(12,'durgesh','delhi');  SQL INSERT INTO Statement is used to add new rows of data to a table in the database.
+    insert into [table_name] values(12,'ankit','kanpur');
+    
+    alter table [table_name] add col1;
+    update [table_name] set col= value , col = value where col=value;
+    delete from [table_name] where col=value;
+    
+    Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+    </code></pre>
+
+   <pre><code lang = "python"> mysql> use learn;
+
+    mysql> show tables;
+    +-----------------+
+    | Tables_in_learn |
+    +-----------------+
+    | student         |
+    +-----------------+
+    1 row in set (0.00 sec)</code></pre>
+    <!-- <pre><code lang = "python">mysql> select * from student;
+    </code></pre>
+    <table> -->
+        <!-- <tr>
+            <th>id</th>
+            <th>city</th>
+            <th>name</th>
+            <th>country</th>
+        </tr>
+        <tr>
+            <td>23</td>
+            <td>ankit</td>
+            <td>delhi</td>
+            <td>ind</td>
+        </tr>
+        <tr>
+            <td>24</td>
+            <td>sanket</td>
+            <td>lukhnow</td>
+            <td>india</td>
+        </tr>
+    </table> -->
+<pre><code lang = "python">
+mysql> select * from student;
++----------+---------+---------+---------+
+| id       | name    | city    | country |
++----------+---------+---------+---------+
+|       23 | ankit   | delhi   | ind     |
+|       24 | sanket  | lucknow | india   |
+|      234 | ishant  | lucknow | india   |
+|      246 | sumit   | lucknow | india   |
+|     2334 | aman    | kanpur  | india   |
+| 24234236 | ramsigh | lucknow | india   |
++----------+---------+---------+---------+
+6 rows in set (0.00 sec)
+
+</code></pre>
+<pre><code lang = "python">
+mysql> select * from student where city='lucknow';
++----------+---------+---------+---------+
+| id       | name    | city    | country |
++----------+---------+---------+---------+
+|       24 | sanket  | lucknow | india   |
+|      234 | ishant  | lucknow | india   |
+|      246 | sumit   | lucknow | india   |
+| 24234236 | ramsigh | lucknow | india   |
++----------+---------+---------+---------+
+4 rows in set (0.00 sec)
+
+</code></pre>
+<pre><code class="python">mysql> select name,city,country from student where country='india';
+    +---------+---------+---------+
+    | name    | city    | country |
+    +---------+---------+---------+
+    | sanket  | lucknow | india   |
+    | ishant  | lucknow | india   |
+    | sumit   | lucknow | india   |
+    | aman    | kanpur  | india   |
+    | ramsigh | lucknow | india   |
+    +---------+---------+---------+
+</code></pre>
+<pre><code class="python">
+mysql> select distinct(country) from student;
++---------+
+| country |
++---------+
+| ind     |
+| india   |
++---------+
+2 rows in set (0.00 sec)
+
+</code></pre>
+<pre><code class="python">
+mysql> select name as  "USERNAME" , city as "CITYNAME" from student ;
+    +----------+----------+
+    | USERNAME | CITYNAME |
+    +----------+----------+
+    | ankit    | delhi    |
+    | sanket   | lucknow  |
+    | ishant   | lucknow  |
+    | sumit    | lucknow  |
+    | aman     | kanpur   |
+    | ramsigh  | lucknow  |
+    +----------+----------+
+    6 rows in set (0.00 sec)
+</code></pre>   
+<pre><code lang = "python">
+mysql> select name as  "USERNAME" , city as "CITYNAME" from student ;
++----------+----------+
+| USERNAME | CITYNAME |
++----------+----------+
+| ankit    | delhi    |
+| sanket   | lucknow  |
+| ishant   | lucknow  |
+| sumit    | lucknow  |
+| aman     | kanpur   |
+| ramsigh  | lucknow  |
++----------+----------+
+6 rows in set (0.00 sec)
+
+mysql> select * from student limit 4;
++-----+--------+---------+---------+
+| id  | name   | city    | country |
++-----+--------+---------+---------+
+|  23 | ankit  | delhi   | ind     |
+|  24 | sanket | lucknow | india   |
+| 234 | ishant | lucknow | india   |
+| 246 | sumit  | lucknow | india   |
++-----+--------+---------+---------+
+4 rows in set (0.00 sec)
+
+mysql> select * from student limit 2 offset 2;
++-----+--------+---------+---------+
+| id  | name   | city    | country |
++-----+--------+---------+---------+
+| 234 | ishant | lucknow | india   |
+| 246 | sumit  | lucknow | india   |
++-----+--------+---------+---------+
+2 rows in set (0.00 sec)
+
+mysql> select * from student order by id;
++----------+---------+---------+---------+
+| id       | name    | city    | country |
++----------+---------+---------+---------+
+|       23 | ankit   | delhi   | ind     |
+|       24 | sanket  | lucknow | india   |
+|      234 | ishant  | lucknow | india   |
+|      246 | sumit   | lucknow | india   |
+|     2334 | aman    | kanpur  | india   |
+| 24234236 | ramsigh | lucknow | india   |
++----------+---------+---------+---------+
+6 rows in set (0.00 sec)
+
+mysql> select * from student order by id desc;
++----------+---------+---------+---------+
+| id       | name    | city    | country |
++----------+---------+---------+---------+
+| 24234236 | ramsigh | lucknow | india   |
+|     2334 | aman    | kanpur  | india   |
+|      246 | sumit   | lucknow | india   |
+|      234 | ishant  | lucknow | india   |
+|       24 | sanket  | lucknow | india   |
+|       23 | ankit   | delhi   | ind     |
++----------+---------+---------+---------+
+6 rows in set (0.00 sec)
+
+mysql> select * from student order by id desc limit 2;
++----------+---------+---------+---------+
+| id       | name    | city    | country |
++----------+---------+---------+---------+
+| 24234236 | ramsigh | lucknow | india   |
+|     2334 | aman    | kanpur  | india   |
++----------+---------+---------+---------+
+2 rows in set (0.00 sec)
+
+mysql> select * from student where name like 'a%';
++------+-------+--------+---------+
+| id   | name  | city   | country |
++------+-------+--------+---------+
+|   23 | ankit | delhi  | ind     |
+| 2334 | aman  | kanpur | india   |
++------+-------+--------+---------+
+2 rows in set (0.00 sec)
+
+SELECT for searching the name which start with 'a'.If we put % at the beginnig,it will filter the names ending with a and if % is like this(%a%),it will come up with all those queries where a is used.
+
+The following SQL statement selects all customers with a City starting with any character, followed by "ondon":
+
+Example
+SELECT * FROM Customers
+WHERE City LIKE '_ondon';
+
+mysql> select MIN(id) from student;
++---------+
+| MIN(id) |
++---------+
+|      23 |
++---------+
+1 row in set (0.00 sec)
+
+mysql> select name from student where id = (select MIN(id) from student) ;
++-------+
+| name  |
++-------+
+| ankit |
++-------+
+1 row in set (0.00 sec)
+
+mysql> select name from student where id = (select MAX(id) from student) ;
++-----------+
+| name      |
++-----------+
+| ram singh |
++-----------+
+1 row in set (0.00 sec)
+
+</code></pre>
+<p class="pre">finally join statement which let us query between two or more tables based on something that joins it.</p>
+<a href="static/img/connector.png" target="_blank">
+    <img class = "img"src = "/static/img/connector.png"/>
+</a>
+<p class="pre">The MySQL Connectors  are the drivers and libraries that you use to connect applications in different programming languages to MySQL database servers. The application and database server can be on the same machine, or communicate across the network.MySQL Connector/Python enables Python programs to access MySQL databases, using an API that is compliant with the Python Database API.</p>
+
+
+
+
+    
+</p>
+{% endblock %}

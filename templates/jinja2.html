@@ -1,0 +1,16 @@
+{% extends 'basis.html' %}
+{% block title %}
+<title>jinja2</title>
+{%endblock%}
+{%block body%}
+<p class="pre">
+    In Jinja anything found between double opening and double closing curly braces tells the engine to evaluate and then print it. if the variable name is 'chapter',it should be withn double curly braces.{{ '{{ chapters}}'}} .
+    <pre><code lang = "python">"{{ chapter}}."</code></pre>
+</p>
+<p class="pre">Getting length in jinja2</p>
+<pre class lang = "python"><code>
+    <span>You have {{chapter|length}} words in chapter variable.</span>
+</code></pre>
+
+<footer><a href="https://ttl255.com/jinja2-tutorial-part-1-introduction-and-variable-substitution/">for further info</a></footer>
+{%endblock%}

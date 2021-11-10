@@ -1,0 +1,30 @@
+*{
+    box-sizing: border-box;
+    margin: 0;
+    padding:0;
+}
+body{
+    padding:1em;
+    margin: 1em;
+    background:white(177, 176, 176);
+    
+
+}
+.pre{
+    margin:1.5em 1.5em 1.5em 0;
+}
+#toTheRight{
+    float:right;
+    text-decoration: none;
+    padding:0.5em;
+    border:solid black 2px ;
+    border-radius: 1em;
+}
+.img{
+    height:30%;
+    width:30%;
+}
+p{
+    height:40px;
+    
+}
