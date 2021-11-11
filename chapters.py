@@ -15,5 +15,8 @@ def sitepackage() -> 'html':
 @app.route('/jinja2')
 def jinja2() -> 'html':
     return render_template('jinja2.html', chapter = 'This sentence  is being rendered from chapters.py.Look in the code.')
+@app.route('/commandline')
+def commandline() -> 'html':
+    return render_template('commandlineSyntax.html')
 if __name__ == '__main__':
     app.run(debug=True,port=8080)

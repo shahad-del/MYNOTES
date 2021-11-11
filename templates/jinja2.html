@@ -11,6 +11,57 @@
 <pre class lang = "python"><code>
     <span>You have {{chapter|length}} words in chapter variable.</span>
 </code></pre>
+<p class="pre">Working with include</p>
+<pre class lang = "python"><code>
+  {% include "chapterMenuList.html" %}
+</code></pre>
+<p class="pre">Jinja2 being a templating language has no need for wide choice of loop types so we only get for loop.</p>
+<pre><code lang = "python">
+  {{ ' {% for my_item in my_collection %} and end with {% endfor %}'}}
+</code></pre>
+<p class="pre"> looping over DICTIONARY</p>
+<pre><code lang="jinja2">
+    interfaces:
+  Ethernet1:
+    description: leaf01-eth51
+    ipv4_address: 10.50.0.0/31
+  Ethernet2:
+    description: leaf02-eth51
+    ipv4_address: 10.50.0.2/31
 
-<footer><a href="https://ttl255.com/jinja2-tutorial-part-1-introduction-and-variable-substitution/">for further info</a></footer>
-{%endblock%}
+
+{%raw %}
+    {% for iname, idata in interfaces.items() %}
+    interface {{ iname }}
+     description {{ idata.description }}
+     ip address {{ idata.ipv4_address }}
+    {% endfor %}
+
+{% endraw %}
+
+RESULT:
+interface Ethernet1
+ description leaf01-eth51
+ ip address 10.50.0.0/31
+interface Ethernet2
+ description leaf02-eth51
+ ip address 10.50.0.2/31
+</code></pre>
+{% raw %}
+<p class="pre">
+    If you rely on the order in which they've been recorded you should either use collections.OrderedDict if using Jinja2 in Python script, or you can apply dictsort filter in your template to order your dictionary by key or value.
+    To sort by key:
+    <pre><code lang = "python">
+       {% for k, v in my_dict | dictsort %}
+      </code></pre>
+    To sort by value:
+    <pre><code lang = "python">
+    {% for k, v in my_dict | dictsort(by='value') %} 
+    
+     </code></pre>
+</p>
+
+<address><a href="https://ttl255.com/jinja2-tutorial-part-1-introduction-and-variable-substitution/">for further info</a></address>
+
+{% endraw %}
+{% endblock %}

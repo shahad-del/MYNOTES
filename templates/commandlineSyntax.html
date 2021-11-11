@@ -3,4 +3,81 @@
 <title>commandlineSyntax</title>
 {%endblock %}
 {%block body %}
+<p class="pre">
+    At the prompt, type pwd and press <ENTER>. The Command Line will print out the path to the folder that you’re currently in.
+    <pre><code lang = "python">
+shahadsuman@shahads-air ~ % pwd
+/Users/shahadsuman
+    </code></pre>
+</p>
+<p class="pre">
+    Type ls and press <ENTER>. The contents (files and subfolders) that reside in the current directory are printed to the screen.
+</p>
+<p class="pre">Rerun the previous command like this ls -al and press <ENTER>. Now we will get more details about the directory contents, including file sizes, modification dates, and file permissions.we added the -a flag which will list all directory contents (including hidden files) as well as the -l flag which displays the extra file details.
+</p>
+<p>
+<pre><code lang="python">
+shahadsuman@shahads-air ~ % ls -a
+.			.omnisharp		Documents
+..			.pytest_cache		Downloads
+.CFUserTextEncoding	.python_history		Library
+.DS_Store		.ssh			Movies
+.Trash			.swiftpm		Music
+.config			.swp			Pictures
+</code></pre>
+</p>
+<p class="pre">
+    Let’s say that you’re in the command line and that you need to move into a folder that’s far away, something like ~/Documents/OdinProject/foundations/javascript/calculator/.  we’re way too lazy for that! Basically, by hitting Tab, the command line will automatically complete commands that you’ve started typing once there’s only one option.
+</p>
+
+<p class="pre">
+        we can create a new folder using the mkdir command, which stands for "Make Directory”.Type mkdir testdir and press ENTER
+</p>
+
+<p class="pre">
+    To create multiple nested directories at once, use the -p flag to create a whole chain of directories like this: 
+    <pre><code lang = "python">mkdir -p directory1/directory2/directory3
+    </code></pre>
+
+</p>
+<p class="pre"> To browse through different directories in the file system. We can do this via the cd command, which stands for "Change Directory”.
+</p>
+
+<p class="pre">
+    Type cd .. and press ENTER. The .. tells the Command Line to browse backwards to the parent directory.
+    <pre><code lang = "python"><ol>
+        <li>cd .. (two dots). The .. means “the parent directory” of your current directory, so you can use cd .. to go back (or up) one directory.</li>
+        <li>cd ~ (the tilde). The ~ means the home directory, so this command will always change back to your home directory (the default directory in which the Terminal opens).</li></ol>
+    </code></pre>
+
+</p>
+<p class="pre">
+    To create a new empty file in the current directory Type: <pre><code>touch newfile1.txt </code></pre>
+    <p class="pre">and press ENTER. Now we’ll copy that file from one folder to another using the cp command.Type:</p>
+    <pre><code lang = "python">cp newfile1.txt testdir</code></pre> <p >and press ENTER.</p>
+</p>
+<p class="pre">
+    We can also move files instead of copying using the mv command.
+    <pre><code>Type touch newfile2.txt and press ENTER to create a new file.</code></pre>
+    <pre><code>Next, type mv newfile2.txt testdir and press ENTER to move the file into the "testdir" folder.</code></pre>
+</p>
+<p class="pre">
+    The mv command can also be used to rename files.To do that, type <pre><code>touch newfile3.txt</code> and press ENTER to create a new file. Then type <pre><code> mv newfile3.txt cheese.txt</code></pre>ENTER to update the file’s name.
+</p>
+<p class="pre">
+Finally, we can delete files and folders using the rm command.Type:<pre><code>rm cheese.txt</code></pre> and press ENTER to remove the file.Type: <pre><code>rm -rf testdir</code></pre> and press ENTER to remove the "testdir" directory and its contents.
+
+</p>
+<p class="pre">These are bash commands. Last commands let us add file in the source/path  :
+<pre><code>echo $PATH (print the value of path variable)
+export PATH=${PATH}:/usr/local/mysql/bin/
+mysql --version
+export PATH=${PATH}:/usr/local/mysql/bin/
+source ~/.zshrc
+nano .my (nano is command line editor .here it is opening .my file n letting us edit it)
+nano ~/.zshrc (here through nano we are editing
+zshrc[configuration file] and adding path in source)
+</code></pre>
+
+</p>
 {% endblock %}

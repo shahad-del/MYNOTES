@@ -4,12 +4,6 @@
 {% endblock %}
 {% block body %}
 
-<ol>
-    <li><a href="http://127.0.0.1:8080/mysql" target="_blank" style="text-decoration: none";">mysql syntax</a></li>
-    <li><a href="commandlineSyntax.html" target="_blank" style="text-decoration: none">commandline syntax</a></li>
-    <li><a href="http://127.0.0.1:8080/flask" target="_blank" style="text-decoration: none"> Flask</a></li>
-    <li><a href="http://127.0.0.1:8080/sitepackages" target="_blank" style="text-decoration: none"> include module to site packages</a></li>
-    <li><a href="http://127.0.0.1:8080/jinja2" target="_blank" style="text-decoration: none"> jinja2</a></li>
-    
-</ol>
+{% include 'chapterMenuList.html' %}
+
 {% endblock %}

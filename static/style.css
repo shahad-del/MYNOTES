@@ -12,6 +12,7 @@ body{
 }
 .pre{
     margin:1.5em 1.5em 1.5em 0;
+    display:block;
 }
 #toTheRight{
     float:right;
