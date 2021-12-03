@@ -39,5 +39,37 @@ if __name__ =="__main__":
 </p>
 <p class="pre">In the route we can directly declare what we want to do with METHOD variable.To handle both GET and POST requests, we add that in the decorator app.route() method.Whatever request you want, you change it in the decorator.</p>
 <pre><code lang="python">@app.route('/login',methods = ['POST', 'GET'])</code></pre>
-<p class="pre">we can see the posted data  of the form in the network section of inspect section of browser developer's tool.
+<p class="pre">we can see the posted data  of the form in the network section of inspect section of browser developer's tool.</p>
+<a href="/static/img/sendingAutomaticMail.png"><img class = "img" src = "/static/img/sendingAutomaticMail.png"></a>
+<h2 style ="padding:50px 0px">lets start with auto complete user input</h2>
+<p class="pre">First in app.py file or any other .py file :</p>
+<pre><code lang="python">
+    words=[]
+    with open('large','r') as file:
+        for line in file.readlines(): 
+            words.appned(line.rstrip())
+</code></pre>
+<p class="pre">The above code opens a file named <strong>Large</strong> in read mode.Then it reads it line by line using <strong>'readlines'</strong> mode n finally through <strong>'rstrip'</strong>  it is stripping <strong>'/n'</strong> in every line because of which the loops spits out the contents of the file in seperate lines.</p>
+<p class="pre">Now in .html file:</p>
+{% raw %}
+    <pre><code lang = "python">
+    
+            form action="/search" method="get">
+                input autocomplete="off" autofocus name="q" placeholder="query" type="text">
+                input type="submit" value="Search">
+            /form>   
+    </code></pre>
+{% endraw %}
+<p class="pre"> Now make a search route in app.py and have following details:</p>
+<pre><code lang="python">
+    words = [word for word in WORDS if word.startswith(request.args.get("q"))]
+    return render_templates("search.html",words= words)
+    This pyhtonic one line expresses the following:
+    words = []
+    q =request.args.get("q")
+    for word in WORDS:  
+        if word.stratswith(q):
+        words.append(word)
+    return render_templates("search.html",words= words)
+</code>
 {%endblock%}

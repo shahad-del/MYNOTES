@@ -69,6 +69,7 @@ Just as you can delete databases with DROP, you can use DROP to delete a user al
     
     alter table [table_name] add col1;
     update [table_name] set col= value , col = value where col=value;
+    UPDATE favorites SET title="toy story first" where Title="Toy Story";
     delete from [table_name] where col=value;
     
     Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
@@ -203,7 +204,7 @@ mysql> select * from student limit 2 offset 2;
 +-----+--------+---------+---------+
 2 rows in set (0.00 sec)
 
-mysql> select * from student order by id;
+mysql> select * from student order by id; ( order arranges in ascending order.)
 +----------+---------+---------+---------+
 | id       | name    | city    | country |
 +----------+---------+---------+---------+
@@ -248,6 +249,8 @@ mysql> select * from student where name like 'a%';
 2 rows in set (0.00 sec)
 
 SELECT for searching the name which start with 'a'.If we put % at the beginnig,it will filter the names ending with a and if % is like this(%a%),it will come up with all those queries where a is used.
+syntax for this :
+select * from students where name Like  "%a%";
 
 The following SQL statement selects all customers with a City starting with any character, followed by "ondon":
 
@@ -285,10 +288,17 @@ mysql> select name from student where id = (select MAX(id) from student) ;
     <img class = "img"src = "/static/img/connector.png"/>
 </a>
 <p class="pre">The MySQL Connectors  are the drivers and libraries that you use to connect applications in different programming languages to MySQL database servers. The application and database server can be on the same machine, or communicate across the network.MySQL Connector/Python enables Python programs to access MySQL databases, using an API that is compliant with the Python Database API.</p>
-
-
-
-
-    
+<p class="pre">SELECT UPPER(FIRST_NAME) FROM worker</p>   
+</p>
+<p class="pre">Converting scv file into MySQL database:</p>
+<p class="pre">
+    <pre><code class="python">
+        sqlite3 name of database
+        sqlite3 favorites.db
+        .mode csv
+        .import "csv file name" "sheet name where csv file will be converted into into a database"
+        .import favourites.csv favourites
+        <!-- Now we can use mysql syntaxes -->
+        .schema let us know of design of our database</code></pre>
 </p>
 {% endblock %}

@@ -1,0 +1,57 @@
+{% extends 'basis.html' %}
+{% block title %}
+<title>csv</title>
+{%endblock %}
+{% block body %}
+<pre><code lang="python">
+    import csv
+    with open("favourites.csv","r") as file:
+        reader = csv.reader(file)
+        next(reader)
+        for row in reader:
+            print(row[1])
+</code></pre>
+<p class="pre"> We can use <strong>'dictreader'</strong> instead of <strong>reader</strong> as it is not everytime we remember the row or columns title of certain movies had been kept in csv file.Dictreader encloses all data in key value pair and there by making it easier to retrieve those.  </p>
+<pre><code lang="python">
+    import csv
+    with open("favourites.csv","r") as file:
+        reader = csv.DictReader(file)
+        next(reader)
+         next ignores the first line of csv file
+        for row in reader:
+            print(row["title"])
+</code></pre>
+<p class ="pre"> Filter out duplicates values:</p>
+<pre><code lang="python">
+    titles = set()
+    with open("favourites.csv","r") as file:
+        reader = csv.DictReader(file)
+        next(reader)
+        # next ignores the first line of csv file
+        for row in reader:
+            title = row["Title"].strip().upper()
+            titles.add(title)
+    for t in titles:
+        print(t)    
+</code></pre>
+<p class="pre"> The worst part of filtering out duplicates in above way is it's running time increases time and again as it is iterating over the list twice- once in for loop of reader and other in for loop at last.So here  is just another way of doing same:  </p>
+<p class="pre"><pre><code lang = "python">
+    with open("favourites.csv","r") as file:
+        reader = csv.DictReader(file)
+        next(reader)
+        for row in reader:
+            title = row["Title"].strip().upper()
+            if not title in titles:
+                titles[title] = 0
+            titles[title] += 1
+    def get_value(title):
+        return titles[title]
+    for t in sorted(titles,key=get_value,reverse=True):
+        # python usually sorts  by key name either in ascending order or decending order(reverse = True) but if we intend to sort it by value we can do it through function.
+        print(t,titles[t])
+</code></pre></p>
+<p class="pre">Now when we are using functions to sort by value, there is more prominent sorting done and that is through LAMBDA.When we use functions in one place and never used it again,LAMBDA comes into play there.It gives anonymous function and stops us from making a function which won't be used anywhere else.</p>
+<p class="pre"><pre><code class="python">
+    for t in sorted(titles,key=lambda title: titles[title],reverse=True):
+</code></pre></p>
+{% endblock %}

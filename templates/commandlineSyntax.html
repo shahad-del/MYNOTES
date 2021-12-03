@@ -68,7 +68,7 @@ shahadsuman@shahads-air ~ % ls -a
 Finally, we can delete files and folders using the rm command.Type:<pre><code>rm cheese.txt</code></pre> and press ENTER to remove the file.Type: <pre><code>rm -rf testdir</code></pre> and press ENTER to remove the "testdir" directory and its contents.
 
 </p>
-<p class="pre">These are bash commands. Last commands let us add file in the source/path  :
+<p class="pre">These are bash commands:
 <pre><code>echo $PATH (print the value of path variable)
 export PATH=${PATH}:/usr/local/mysql/bin/
 mysql --version
@@ -77,7 +77,66 @@ source ~/.zshrc
 nano .my (nano is command line editor .here it is opening .my file n letting us edit it)
 nano ~/.zshrc (here through nano we are editing
 zshrc[configuration file] and adding path in source)
+
+<h2>Check file permissions:</h2>
+ls -l {file_name}
+<pre><code>
+shahadsuman@shahads-air ~ % ls -l
+total 3800
+drwx------@  3 shahadsuman  staff       96 Jun 22 00:23 Applications
+drwx------@ 22 shahadsuman  staff      704 Nov  8 16:03 Desktop
+drwx------@  9 shahadsuman  staff      288 Nov  9 23:12 Documents
+drwx------+ 21 shahadsuman  staff      672 Oct 29 16:46 Downloads
+-rw-r--r--   1 shahadsuman  staff  1937837 Jul 12 16:21 get-pip.py
+-rw-r--r--   1 shahadsuman  staff        0 Oct 16 17:00 needed.txt
+</code></pre>
+<pre><code>shahadsuman@shahads-air ~ % ls -l needed.txt
+-rw-r--r--  1 shahadsuman  staff  0 Oct 16 17:00 needed.txt</code></pre>
+
+<h2>Here the user has the permission to rw(read and write) but not to execute.</h2>
+		 
+Change file permissions:
+chmod u=rwx,g=rwx,o=rwx [file_name]
+chmod ugo+rwx "needed.txt"
+</code></pre>
+<pre><code>-rwxrwxrwx   1 shahadsuman  staff        0 Oct 16 17:00 needed.txt</code></pre></p>
+<p class="pre">HERE THE PERMISSIONS HAS CHANGED FROM -rw-r--r-- TO -rwxrwxrwx .THIS MEANS INITIALLY USER COULD RW(READ,WRITE) ONLY AND GROUP & OTHERS COULD READ ONLY BUT NOW ALL PERMISSIONS(READ,WRITE AND EXECUTE) HAS BEEN GIVEN TO ALL OF THEM.</p>
+<a href="https://www.chriswrites.com/how-to-change-file-permissions-using-the-terminal/">MORE INFO ON PERMISSIONS</a>
+<p class="pre">Few of GIT syntaxes:</p>
+<pre><code>Reverting changes: 
+git reset --hard
+git clean -fdx
+Viewing history: git log --oneline --pretty
+</code></pre>
+<ol>
+    <li>Git clone basically makes an identical copy of the latest version of a project in a repository and saves it to your computer.</li>
+
+<pre><code>
+git clone https://name-of-the-repository-link</https:>
+
+if we want to download a project from Github, all we need to do is click on the green button (clone or download), copy the URL in the box and paste it after the git clone command .
+</code></pre>
+<h4>To clone my project My Notes in my personal computer,go to git hub,my Notes repository,click code,get the link and paste it:</h4>
+<pre><code>
+git clone https://github.com/shahad-del/MYNOTES.git
 </code></pre>
 
-</p>
+    <li>The Git status command gives us all the necessary information about the current branch.</li> 
+
+<pre><code>git status</code></pre>
+<li>creating repository for first time:</li>
+<pre><code>
+git init
+git remote add origin https://github.com/shahad-del/try.git
+git push -u origin main
+</code></pre>
+
+<li>Everytime you have to update  your repository:</li>
+</ol>
+<pre><code>
+git add .
+git commit -m "msg" 
+git push
+</code></pre>
+
 {% endblock %}

@@ -18,5 +18,8 @@ def jinja2() -> 'html':
 @app.route('/commandline')
 def commandline() -> 'html':
     return render_template('commandlineSyntax.html')
+@app.route('/csv')
+def csv() -> 'html':
+    return render_template('csv.html')
 if __name__ == '__main__':
     app.run(debug=True,port=8080)
