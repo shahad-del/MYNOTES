@@ -48,7 +48,7 @@ Just as you can delete databases with DROP, you can use DROP to delete a user al
         '> '\c</code></pre></p>
     <P class="pre">The prompt changes back to mysql>, indicating that mysql is ready for a new query.
     The `> prompt is similar to the '> and "> prompts, but indicates that you have begun but not completed a back-tick-quoted identifier.It is important to know what the '>, ">, and `> prompts signify, because if you mistakenly enter an unterminated string, any further lines you type appear to be ignored by mysql—including a line containing QUIT. This can be quite confusing, especially if you do not know that you need to supply the terminating quote before you can cancel the current query.</p>
-<pre><code lang = "python">
+<p class="pre"><pre><code lang = "python">
     show databases; You can check the available databases 
     create database [db_name];
     use [db_name]; start using the database
@@ -71,9 +71,20 @@ Just as you can delete databases with DROP, you can use DROP to delete a user al
     update [table_name] set col= value , col = value where col=value;
     UPDATE favorites SET title="toy story first" where Title="Toy Story";
     delete from [table_name] where col=value;
-    
     Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
-    </code></pre>
+    </code></pre></p>
+<p class="pre">Extract 3 characters from a string, starting in position 1:
+    <pre><code lang ="python">SELECT SUBSTRING('SQL Tutorial', 1, 3)</code></p>
+<p class ="pre">conactinating<pre><code lang="python">select CONCAT(FIRST_NAME,' ',LAST_NAME)FROM Worker;</code></pre></p>
+
+<p class = "pre">COLLATE let us make our query case sensitive which  normally is insensitive.Here we are querying  for 'a' not 'A' in Amitabh and collate let us do that.We can do it in two ways : One when constructing a  new database and other when we are querying for something.At the time of constructing a database:</p>
+<pre><code lang="python">CREATE DATABASE db_name
+    [[DEFAULT] CHARACTER SET charset_name]
+    [[DEFAULT] COLLATE collation_name]</code></pre>
+<p class="pre">charset refers to set of symbols and collate is the rules by which they are compared.We can't have any collation name.There is certain list of collation name and charset rules which we are bound to use.    </p>
+<pre><code lang="python">SELECT POSITION('a' in (SELECT FIRST_NAME FROM WORKER WHERE FIRST_NAME COLLATE utf8mb4_0900_as_cs ='Amitabh')COLLATE utf8mb4_0900_as_cs)</code></pre></pre>
+<p>When we need to replace, the pattern is (string from which replacement is to be done,old string,new one to be repalced with )</p>
+<pre><code lang ="python">SELECT REPLACE(FIRST_NAME,'A','a')from Worker;</code></pre>
 
    <pre><code lang = "python"> mysql> use learn;
 
