@@ -3,23 +3,23 @@
 <title>jinja2</title>
 {%endblock%}
 {%block body%}
-<p class="pre">
+<p class = "descText">
     In Jinja anything found between double opening and double closing curly braces tells the engine to evaluate and then print it. if the variable name is 'chapter',it should be withn double curly braces.{{ '{{ chapters}}'}} .
     <pre><code lang = "python">"{{ chapter}}."</code></pre>
 </p>
-<p class="pre">Getting length in jinja2</p>
+<p class = "descText">Getting length in jinja2</p>
 <pre class lang = "python"><code>
     <span>You have {{chapter|length}} words in chapter variable.</span>
 </code></pre>
-<p class="pre">Working with include</p>
+<p class = "descText">Working with include</p>
 <pre class lang = "python"><code>
   {% include "chapterMenuList.html" %}
 </code></pre>
-<p class="pre">Jinja2 being a templating language has no need for wide choice of loop types so we only get for loop.</p>
+<p class = "descText">Jinja2 being a templating language has no need for wide choice of loop types so we only get for loop.</p>
 <pre><code lang = "python">
   {{ ' {% for my_item in my_collection %} and end with {% endfor %}'}}
 </code></pre>
-<p class="pre"> looping over DICTIONARY</p>
+<p class = "descText"> looping over DICTIONARY</p>
 <pre><code lang="jinja2">
     interfaces:
   Ethernet1:
@@ -48,7 +48,7 @@ interface Ethernet2
  ip address 10.50.0.2/31
 </code></pre>
 {% raw %}
-<p class="pre">
+<p class = "descText">
     If you rely on the order in which they've been recorded you should either use collections.OrderedDict if using Jinja2 in Python script, or you can apply dictsort filter in your template to order your dictionary by key or value.
     To sort by key:
     <pre><code lang = "python">
@@ -60,7 +60,7 @@ interface Ethernet2
     
      </code></pre>
 </p>
-<p class="pre">if you want to extract index of the list/dict/or any other ,all you need to use is variable name + ".indexnumber"</p>
+<p class = "descText">if you want to extract index of the list/dict/or any other ,all you need to use is variable name + ".indexnumber"</p>
 <pre><code>interface.0</code></pre>
 <address><a href="https://ttl255.com/jinja2-tutorial-part-1-introduction-and-variable-substitution/">for further info</a></address>
 

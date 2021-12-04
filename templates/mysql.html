@@ -4,28 +4,28 @@
 {% endblock %}
 {% block body %}
 <!-- <p><a href="http://127.0.0.1:8080/" id ="toTheRight">Back to contents</a></p> -->
-<p class="pre">Here’s the command to start the console, logging in as the MySQL database administrator (which uses the root user ID):</p>
+<p class = "descText">Here’s the command to start the console, logging in as the MySQL database administrator (which uses the root user ID):</p>
 <pre><code lang="python">mysql -u root -p</code></pre>
-<p class="pre">Here’s the console command that creates our database:
+<p class = "descText">Here’s the console command that creates our database:
     <pre><code lang ="python">mysql> create database vsearchlogDB;</code></pre>
 </p>
-<p class="pre">Here’s the SQL statement we used to create the required table (called log).
+<p class = "descText">Here’s the SQL statement we used to create the required table (called log).
     <pre><code>mysql> create table log</code></pre>
     </p>
-<p class="pre">    
+<p class = "descText">    
     This next command creates a new MySQL user called vsearch, uses “vsearchpasswd” as the new user’s password, and gives the vsearch user full rights to the vsearchlogDB database:
     </p>
     <pre><code lang="python">CREATE USER 'newuser'@'localhost' IDENTIFIED BY 'password';
 GRANT ALL PRIVILEGES ON * . * TO 'newuser'@'localhost';</code></pre>
-<p class="pre">The asterisks in this command refer to the database and table (respectively) that they can access.</p>
-<p class="pre">Once you have finalized the permissions that you want to set up for your new users, always be sure to reload all the privileges.</p>
+<p class = "descText">The asterisks in this command refer to the database and table (respectively) that they can access.</p>
+<p class = "descText">Once you have finalized the permissions that you want to set up for your new users, always be sure to reload all the privileges.</p>
 <pre><code lang="python">FLUSH PRIVILEGES;</code></pre>
-<p class="pre">
+<p class = "descText">
     To provide a specific user with a permission, you can use this framework:
 
 <pre><code lang ="python">GRANT type_of_permission ON database_name.table_name TO 'username'@'localhost';</code></pre>
  
-<p class="pre">If you want to give them access to any database or to any table, make sure to put an asterisk (*) in the place of the database name or table name.
+<p class = "descText">If you want to give them access to any database or to any table, make sure to put an asterisk (*) in the place of the database name or table name.
 
 Each time you update or change a permission be sure to use the Flush Privileges command.
 
@@ -33,22 +33,22 @@ If you need to revoke a permission, the structure is almost identical to grantin
 
 <pre><code lang ="python">REVOKE type_of_permission ON database_name.table_name FROM 'username'@'localhost';</code></pre>
  
-<p class="pre">Note that when revoking permissions, <b>the syntax requires that you use FROM, instead of TO </b>as we used when granting permissions.
+<p class = "descText">Note that when revoking permissions, <b>the syntax requires that you use FROM, instead of TO </b>as we used when granting permissions.
 
 You can review a user’s current permissions by running the following:</p>
 
 <pre><code>SHOW GRANTS FOR 'username'@'localhost';</code></pre>
-<p class="pre"> 
+<p class = "descText"> 
 Just as you can delete databases with DROP, you can use DROP to delete a user altogether:</p>
 
 <pre><code lang ="python">DROP USER 'username'@'localhost';</code></pre>
 </p>
-<p class="pre">The simplest thing is to cancel the query. However, you cannot just type \c in this case, because mysql interprets it as part of the string that it is collecting. Instead, enter the closing quote character (so mysql knows you've finished the string), then type \c:
+<p class = "descText">The simplest thing is to cancel the query. However, you cannot just type \c in this case, because mysql interprets it as part of the string that it is collecting. Instead, enter the closing quote character (so mysql knows you've finished the string), then type \c:
     <pre><code>mysql> SELECT * FROM my_table WHERE name = 'Smith AND age < 30;
         '> '\c</code></pre></p>
-    <P class="pre">The prompt changes back to mysql>, indicating that mysql is ready for a new query.
+    <P class = "descText">The prompt changes back to mysql>, indicating that mysql is ready for a new query.
     The `> prompt is similar to the '> and "> prompts, but indicates that you have begun but not completed a back-tick-quoted identifier.It is important to know what the '>, ">, and `> prompts signify, because if you mistakenly enter an unterminated string, any further lines you type appear to be ignored by mysql—including a line containing QUIT. This can be quite confusing, especially if you do not know that you need to supply the terminating quote before you can cancel the current query.</p>
-<p class="pre"><pre><code lang = "python">
+<p class = "descText"><pre><code lang = "python">
     show databases; You can check the available databases 
     create database [db_name];
     use [db_name]; start using the database
@@ -73,15 +73,15 @@ Just as you can delete databases with DROP, you can use DROP to delete a user al
     delete from [table_name] where col=value;
     Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
     </code></pre></p>
-<p class="pre">Extract 3 characters from a string, starting in position 1:
+<p class = "descText">Extract 3 characters from a string, starting in position 1:
     <pre><code lang ="python">SELECT SUBSTRING('SQL Tutorial', 1, 3)</code></p>
-<p class ="pre">conactinating<pre><code lang="python">select CONCAT(FIRST_NAME,' ',LAST_NAME)FROM Worker;</code></pre></p>
+<p class = "descText">conactinating<pre><code lang="python">select CONCAT(FIRST_NAME,' ',LAST_NAME)FROM Worker;</code></pre></p>
 
-<p class = "pre">COLLATE let us make our query case sensitive which  normally is insensitive.Here we are querying  for 'a' not 'A' in Amitabh and collate let us do that.We can do it in two ways : One when constructing a  new database and other when we are querying for something.At the time of constructing a database:</p>
+<p class = "descText">COLLATE let us make our query case sensitive which  normally is insensitive.Here we are querying  for 'a' not 'A' in Amitabh and collate let us do that.We can do it in two ways : One when constructing a  new database and other when we are querying for something.At the time of constructing a database:</p>
 <pre><code lang="python">CREATE DATABASE db_name
     [[DEFAULT] CHARACTER SET charset_name]
     [[DEFAULT] COLLATE collation_name]</code></pre>
-<p class="pre">charset refers to set of symbols and collate is the rules by which they are compared.We can't have any collation name.There is certain list of collation name and charset rules which we are bound to use.    </p>
+<p class = "descText">charset refers to set of symbols and collate is the rules by which they are compared.We can't have any collation name.There is certain list of collation name and charset rules which we are bound to use.    </p>
 <pre><code lang="python">SELECT POSITION('a' in (SELECT FIRST_NAME FROM WORKER WHERE FIRST_NAME COLLATE utf8mb4_0900_as_cs ='Amitabh')COLLATE utf8mb4_0900_as_cs)</code></pre></pre>
 <p>When we need to replace, the pattern is (string from which replacement is to be done,old string,new one to be repalced with )</p>
 <pre><code lang ="python">SELECT REPLACE(FIRST_NAME,'A','a')from Worker;</code></pre>
@@ -294,15 +294,15 @@ mysql> select name from student where id = (select MAX(id) from student) ;
 1 row in set (0.00 sec)
 
 </code></pre>
-<p class="pre">finally join statement which let us query between two or more tables based on something that joins it.</p>
+<p class = "descText">finally join statement which let us query between two or more tables based on something that joins it.</p>
 <a href="static/img/connector.png" target="_blank">
     <img class = "img"src = "/static/img/connector.png"/>
 </a>
-<p class="pre">The MySQL Connectors  are the drivers and libraries that you use to connect applications in different programming languages to MySQL database servers. The application and database server can be on the same machine, or communicate across the network.MySQL Connector/Python enables Python programs to access MySQL databases, using an API that is compliant with the Python Database API.</p>
-<p class="pre">SELECT UPPER(FIRST_NAME) FROM worker</p>   
+<p class = "descText">The MySQL Connectors  are the drivers and libraries that you use to connect applications in different programming languages to MySQL database servers. The application and database server can be on the same machine, or communicate across the network.MySQL Connector/Python enables Python programs to access MySQL databases, using an API that is compliant with the Python Database API.</p>
+<p class = "descText">SELECT UPPER(FIRST_NAME) FROM worker</p>   
 </p>
-<p class="pre">Converting scv file into MySQL database:</p>
-<p class="pre">
+<p class = "descText">Converting scv file into MySQL database:</p>
+<p class = "descText">
     <pre><code class="python">
         sqlite3 name of database
         sqlite3 favorites.db

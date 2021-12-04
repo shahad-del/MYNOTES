@@ -1,11 +1,11 @@
 {% extends 'basis.html'%} {% block title%}
 <title>flask</title>
 {%endblock%} {%block body%}
-<!-- <p class="pre">
+<!-- <p class = "descText">
   There are two ways data is received from the server.One through query string
   and other through form data. Query string
 </p> -->
-<p class="pre">Flask is imported and routes are defined in flask in the following way:</p>
+<p class = "descText">Flask is imported and routes are defined in flask in the following way:</p>
 <pre><code lang="python">
 from flask import Flask
 
@@ -19,7 +19,7 @@ def home():
 if __name__ =="__main__":  
     app.run(debug = True)  
 </code></pre>
-<p class="pre">"if __name__ =="__main__": " line makes sure that that the app keeps on running and changing as we change our code.It will trace errors and display it.Each time a change is made, you would have to restart the app to be able to view the change, in order to avoid that, the app can be started in debugging mode where the changes will reflect instantaneously.  </p>
+<p class = "descText">"if __name__ =="__main__": " line makes sure that that the app keeps on running and changing as we change our code.It will trace errors and display it.Each time a change is made, you would have to restart the app to be able to view the change, in order to avoid that, the app can be started in debugging mode where the changes will reflect instantaneously.  </p>
 <p>
     <table>
         <tr>
@@ -37,20 +37,20 @@ if __name__ =="__main__":
         </tr>
     </table>
 </p>
-<p class="pre">In the route we can directly declare what we want to do with METHOD variable.To handle both GET and POST requests, we add that in the decorator app.route() method.Whatever request you want, you change it in the decorator.</p>
+<p class = "descText">In the route we can directly declare what we want to do with METHOD variable.To handle both GET and POST requests, we add that in the decorator app.route() method.Whatever request you want, you change it in the decorator.</p>
 <pre><code lang="python">@app.route('/login',methods = ['POST', 'GET'])</code></pre>
-<p class="pre">we can see the posted data  of the form in the network section of inspect section of browser developer's tool.</p>
+<p class = "descText">we can see the posted data  of the form in the network section of inspect section of browser developer's tool.</p>
 <a href="/static/img/sendingAutomaticMail.png"><img class = "img" src = "/static/img/sendingAutomaticMail.png"></a>
 <h2 style ="padding:50px 0px">lets start with auto complete user input</h2>
-<p class="pre">First in app.py file or any other .py file :</p>
+<p class = "descText">First in app.py file or any other .py file :</p>
 <pre><code lang="python">
     words=[]
     with open('large','r') as file:
         for line in file.readlines(): 
             words.appned(line.rstrip())
 </code></pre>
-<p class="pre">The above code opens a file named <strong>Large</strong> in read mode.Then it reads it line by line using <strong>'readlines'</strong> mode n finally through <strong>'rstrip'</strong>  it is stripping <strong>'/n'</strong> in every line because of which the loops spits out the contents of the file in seperate lines.</p>
-<p class="pre">Now in .html file:</p>
+<p class = "descText">The above code opens a file named <strong>Large</strong> in read mode.Then it reads it line by line using <strong>'readlines'</strong> mode n finally through <strong>'rstrip'</strong>  it is stripping <strong>'/n'</strong> in every line because of which the loops spits out the contents of the file in seperate lines.</p>
+<p class = "descText">Now in .html file:</p>
 {% raw %}
     <pre><code lang = "python">
     
@@ -60,7 +60,7 @@ if __name__ =="__main__":
             /form>   
     </code></pre>
 {% endraw %}
-<p class="pre"> Now make a search route in app.py and have following details:</p>
+<p class = "descText"> Now make a search route in app.py and have following details:</p>
 <pre><code lang="python">
     words = [word for word in WORDS if word.startswith(request.args.get("q"))]
     return render_templates("search.html",words= words)

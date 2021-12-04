@@ -9,12 +9,12 @@ body{
     padding:1em;
     margin: 1em;
     background:white(177, 176, 176);
-    
-
 }
-.pre{
-    margin:1.5em 1.5em 1.5em 0;
+.descText{
+    margin:16px 0;
     display:block;
+    height: auto;
+    width: auto;
 }
 #toTheRight{
     float:right;

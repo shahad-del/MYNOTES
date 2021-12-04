@@ -3,17 +3,17 @@
 <title>commandlineSyntax</title>
 {%endblock %}
 {%block body %}
-<p class="pre">
+<p class = "descText">
     At the prompt, type pwd and press <ENTER>. The Command Line will print out the path to the folder that you’re currently in.
     <pre><code lang = "python">
 shahadsuman@shahads-air ~ % pwd
 /Users/shahadsuman
     </code></pre>
 </p>
-<p class="pre">
+<p class = "descText">
     Type ls and press <ENTER>. The contents (files and subfolders) that reside in the current directory are printed to the screen.
 </p>
-<p class="pre">Rerun the previous command like this ls -al and press <ENTER>. Now we will get more details about the directory contents, including file sizes, modification dates, and file permissions.we added the -a flag which will list all directory contents (including hidden files) as well as the -l flag which displays the extra file details.
+<p class = "descText">Rerun the previous command like this ls -al and press <ENTER>. Now we will get more details about the directory contents, including file sizes, modification dates, and file permissions.we added the -a flag which will list all directory contents (including hidden files) as well as the -l flag which displays the extra file details.
 </p>
 <p>
 <pre><code lang="python">
@@ -26,24 +26,24 @@ shahadsuman@shahads-air ~ % ls -a
 .config			.swp			Pictures
 </code></pre>
 </p>
-<p class="pre">
+<p class = "descText">
     Let’s say that you’re in the command line and that you need to move into a folder that’s far away, something like ~/Documents/OdinProject/foundations/javascript/calculator/.  we’re way too lazy for that! Basically, by hitting Tab, the command line will automatically complete commands that you’ve started typing once there’s only one option.
 </p>
 
-<p class="pre">
+<p class = "descText">
         we can create a new folder using the mkdir command, which stands for "Make Directory”.Type mkdir testdir and press ENTER
 </p>
 
-<p class="pre">
+<p class = "descText">
     To create multiple nested directories at once, use the -p flag to create a whole chain of directories like this: 
     <pre><code lang = "python">mkdir -p directory1/directory2/directory3
     </code></pre>
 
 </p>
-<p class="pre"> To browse through different directories in the file system. We can do this via the cd command, which stands for "Change Directory”.
+<p class = "descText"> To browse through different directories in the file system. We can do this via the cd command, which stands for "Change Directory”.
 </p>
 
-<p class="pre">
+<p class = "descText">
     Type cd .. and press ENTER. The .. tells the Command Line to browse backwards to the parent directory.
     <pre><code lang = "python"><ol>
         <li>cd .. (two dots). The .. means “the parent directory” of your current directory, so you can use cd .. to go back (or up) one directory.</li>
@@ -51,24 +51,24 @@ shahadsuman@shahads-air ~ % ls -a
     </code></pre>
 
 </p>
-<p class="pre">
+<p class = "descText">
     To create a new empty file in the current directory Type: <pre><code>touch newfile1.txt </code></pre>
-    <p class="pre">and press ENTER. Now we’ll copy that file from one folder to another using the cp command.Type:</p>
+    <p class = "descText">and press ENTER. Now we’ll copy that file from one folder to another using the cp command.Type:</p>
     <pre><code lang = "python">cp newfile1.txt testdir</code></pre> <p >and press ENTER.</p>
 </p>
-<p class="pre">
+<p class = "descText">
     We can also move files instead of copying using the mv command.
     <pre><code>Type touch newfile2.txt and press ENTER to create a new file.</code></pre>
     <pre><code>Next, type mv newfile2.txt testdir and press ENTER to move the file into the "testdir" folder.</code></pre>
 </p>
-<p class="pre">
+<p class = "descText">
     The mv command can also be used to rename files.To do that, type <pre><code>touch newfile3.txt</code> and press ENTER to create a new file. Then type <pre><code> mv newfile3.txt cheese.txt</code></pre>ENTER to update the file’s name.
 </p>
-<p class="pre">
+<p class = "descText">
 Finally, we can delete files and folders using the rm command.Type:<pre><code>rm cheese.txt</code></pre> and press ENTER to remove the file.Type: <pre><code>rm -rf testdir</code></pre> and press ENTER to remove the "testdir" directory and its contents.
 
 </p>
-<p class="pre">These are bash commands:
+<p class = "descText">These are bash commands:
 <pre><code>echo $PATH (print the value of path variable)
 export PATH=${PATH}:/usr/local/mysql/bin/
 mysql --version
@@ -100,9 +100,9 @@ chmod u=rwx,g=rwx,o=rwx [file_name]
 chmod ugo+rwx "needed.txt"
 </code></pre>
 <pre><code>-rwxrwxrwx   1 shahadsuman  staff        0 Oct 16 17:00 needed.txt</code></pre></p>
-<p class="pre">HERE THE PERMISSIONS HAS CHANGED FROM -rw-r--r-- TO -rwxrwxrwx .THIS MEANS INITIALLY USER COULD RW(READ,WRITE) ONLY AND GROUP & OTHERS COULD READ ONLY BUT NOW ALL PERMISSIONS(READ,WRITE AND EXECUTE) HAS BEEN GIVEN TO ALL OF THEM.</p>
+<p class = "descText">HERE THE PERMISSIONS HAS CHANGED FROM -rw-r--r-- TO -rwxrwxrwx .THIS MEANS INITIALLY USER COULD RW(READ,WRITE) ONLY AND GROUP & OTHERS COULD READ ONLY BUT NOW ALL PERMISSIONS(READ,WRITE AND EXECUTE) HAS BEEN GIVEN TO ALL OF THEM.</p>
 <a href="https://www.chriswrites.com/how-to-change-file-permissions-using-the-terminal/">MORE INFO ON PERMISSIONS</a>
-<p class="pre">Few of GIT syntaxes:</p>
+<p class = "descText">Few of GIT syntaxes:</p>
 <pre><code>Reverting changes: 
 git reset --hard
 git clean -fdx
