@@ -4,6 +4,8 @@
     padding:0;
 }
 body{
+    font-family: 'Lato', sans-serif;
+    font-size: 18px;
     padding:1em;
     margin: 1em;
     background:white(177, 176, 176);
@@ -28,4 +30,8 @@ body{
 p{
     height:40px;
     
+}
+
+ol.chapter-menu li{
+    margin: 12px 0;
 }

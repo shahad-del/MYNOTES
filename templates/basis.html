@@ -1,21 +1,28 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="static/style.css">
-    <link rel="stylesheet" href="static/default.min.css">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Lato:wght@100;300&display=swap"
+      rel="stylesheet"
+    />
+
+    <link rel="stylesheet" href="static/style.css" />
+    <link rel="stylesheet" href="static/default.min.css" />
 
     <script src="static/highlight.min.js"></script>
     {% block title %}{% endblock %}
-
-</head>
-<body>
-    <p><a href="http://127.0.0.1:8080/" id ="toTheRight">Back to contents</a></p>
+  </head>
+  <body>
+    <p><a href="http://127.0.0.1:8080/" id="toTheRight">Back to contents</a></p>
     {% block body %}{% endblock %}
     <script>
-        hljs.highlightAll();
-    </script>   
-</body>
+      hljs.highlightAll();
+    </script>
+  </body>
 </html>
