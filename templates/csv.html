@@ -3,14 +3,14 @@
 <title>csv</title>
 {%endblock %}
 {% block body %}
-<pre><code lang="python">
+<p class="descText"><pre><code lang="python">
     import csv
     with open("favourites.csv","r") as file:
         reader = csv.reader(file)
         next(reader)
         for row in reader:
             print(row[1])
-</code></pre>
+</code></pre></p>
 <p class = "descText"> We can use <strong>'dictreader'</strong> instead of <strong>reader</strong> as it is not everytime we remember the row or columns title of certain movies had been kept in csv file.Dictreader encloses all data in key value pair and there by making it easier to retrieve those.  </p>
 <pre><code lang="python">
     import csv
