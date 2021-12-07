@@ -70,13 +70,21 @@ Just as you can delete databases with DROP, you can use DROP to delete a user al
     alter table [table_name] add col1;
     update [table_name] set col= value , col = value where col=value;
     UPDATE favorites SET title="toy story first" where Title="Toy Story";
+
     delete from [table_name] where col=value;
+
     SELECT COUNT(DISTINCT rating)FROM film;
 
     SQL query to print details of the Workers whose FIRST_NAME contains 'a'.
     SELECT * FROM Worker where FIRST_NAME LIKE ‘%a%‘;
+
     SQL query to print details of the Workers whose FIRST_NAME ends with 'a'.
     SELECT * FROM Worker where FIRST_NAME LIKE ‘%a’;
+
+    SQL query to print details of the Workers whose FIRST_NAME ends with 'h' and contains six alphabets.
+    SELECT * FROM Worker where FIRST_NAME LIKE '%h%' AND   LENGTH(FIRST_NAME) = 6 ;
+    
+
     Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
     </code></pre></p>
 <p class = "descText">Extract 3 characters from a string, starting in position 1:
