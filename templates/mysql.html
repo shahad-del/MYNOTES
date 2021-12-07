@@ -83,6 +83,9 @@ Just as you can delete databases with DROP, you can use DROP to delete a user al
 
     SQL query to print details of the Workers whose FIRST_NAME ends with 'h' and contains six alphabets.
     SELECT * FROM Worker where FIRST_NAME LIKE '%h%' AND   LENGTH(FIRST_NAME) = 6 ;
+
+    SQL query to print details of the Workers who have joined in Feb’2014
+    SELECT * FROM Worker where year(JOINING_DATE) ='2014' and month(JOINING_DATE) = '2';
     
 
     Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
