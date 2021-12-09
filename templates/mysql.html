@@ -174,7 +174,7 @@ mysql> select distinct(country) from student;
 2 rows in set (0.00 sec)
 
 </code></pre>
-<pre><code class="python">
+<pre><code class="python"> 
 mysql> select name as  "USERNAME" , city as "CITYNAME" from student ;
     +----------+----------+
     | USERNAME | CITYNAME |
@@ -187,7 +187,8 @@ mysql> select name as  "USERNAME" , city as "CITYNAME" from student ;
     | ramsigh  | lucknow  |
     +----------+----------+
     6 rows in set (0.00 sec)
-</code></pre>   
+</code></pre> 
+Here 'as' works as ALIAS.It is allowed to be used only in SELECT statement.  
 <pre><code lang = "python">
 mysql> select name as  "USERNAME" , city as "CITYNAME" from student ;
 +----------+----------+
@@ -309,18 +310,25 @@ mysql> select name from student where id = (select MAX(id) from student) ;
 <p class = "descText">The MySQL Connectors  are the drivers and libraries that you use to connect applications in different programming languages to MySQL database servers. The application and database server can be on the same machine, or communicate across the network.MySQL Connector/Python enables Python programs to access MySQL databases, using an API that is compliant with the Python Database API.</p>
 <p class = "descText">SELECT UPPER(FIRST_NAME) FROM worker</p>   
 </p>
-<p class = "descText">Converting scv file into MySQL database:</p>
+<p class = "descText">Converting CSV file into MySQL database:</p>
 <p class = "descText">
-    <pre><code class="python">
-        sqlite3 name of database
-        sqlite3 favorites.db
-        .mode csv
-        .import "csv file name" "sheet name where csv file will be converted into into a database"
-        .import favourites.csv favourites
-        <!-- Now we can use mysql syntaxes -->
-        .schema let us know of design of our database</code></pre>
+    <pre><code class="SQL">sqlite3 name of database
+sqlite3 favorites.db
+.mode csv
+.import "csv file name" "sheet name where csv file will be converted into into a database"
+.import favourites.csv favourites
+-- Now we can use mysql syntaxes
+.schema let us know of design of our database</code></pre>
 </p>
+<h3 class = "descText">GROUP_BY AND HAVING</h3>
 <ol>
+    <li>HAVING function comes after GROUP BY FUNCTION and allows us to filter after aggregation has already taken place.Aggregatiion takes place after group by statement,that's why we can't use it with WHERE clause  as it takes place before GROUP BY FUNCTION.To filter out the data on statements based on agregated functions like SUM(amount),we have to use HAVING and that also after GROUP BY FUNCTION.Filter with WHERE statement on SUM amount is not possible.</li>
+    <p class = "descText">
+<pre><code lang = 'SQL'>
+SELECT customer_id,sum(amount) FROM payment
+GROUP BY customer_id
+HAVING SUM(amount) > 100
+</code></pre></p>
     <li>GROUP BY comes after from clause or where clause,not after ORDER BY or others.</li>
     <li>GROUP BY  should includes all those columns which are included in select statement without using agregate function like MAX,AVG,COUNT.</li>
     <li>GROUP BY function is not called by agregate functions.  </li>
@@ -328,8 +336,8 @@ mysql> select name from student where id = (select MAX(id) from student) ;
         GROUP BY customer_id
         ORDER BY customer_id;
 If there is some other column also after customer_id,it should be in GROUP BY call too but not count(amount),sum(amount) as they are agregate function.</code></pre></p>
-
-    </ol>
+</ol>
+<h3 class='descText'>JOINS</h3>
 <video width="420" height="340" controls>
     <source src="/static/groupBy.mkv" type="video/mp4">
     Your browser does not support the video tag.
