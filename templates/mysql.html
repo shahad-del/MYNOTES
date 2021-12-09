@@ -48,7 +48,7 @@ Just as you can delete databases with DROP, you can use DROP to delete a user al
         '> '\c</code></pre></p>
     <P class = "descText">The prompt changes back to mysql>, indicating that mysql is ready for a new query.
     The `> prompt is similar to the '> and "> prompts, but indicates that you have begun but not completed a back-tick-quoted identifier.It is important to know what the '>, ">, and `> prompts signify, because if you mistakenly enter an unterminated string, any further lines you type appear to be ignored by mysql—including a line containing QUIT. This can be quite confusing, especially if you do not know that you need to supply the terminating quote before you can cancel the current query.</p>
-<p class = "descText"><pre><code lang = "python">
+<p class = "descText"><pre><code lang = "SQL">
     show databases; You can check the available databases 
     create database [db_name];
     use [db_name]; start using the database
@@ -64,7 +64,8 @@ Just as you can delete databases with DROP, you can use DROP to delete a user al
     alter table [old table name] rename to [new name];
     truncate table [table_name];
     
-    insert into [table_name](id,name,city) values(12,'durgesh','delhi');  SQL INSERT INTO Statement is used to add new rows of data to a table in the database.
+    insert into [table_name](id,name,city) values(12,'durgesh','delhi');  
+    -- SQL INSERT INTO Statement is used to add new rows of data to a table in the database.
     insert into [table_name] values(12,'ankit','kanpur');
     
     alter table [table_name] add col1;
@@ -75,17 +76,20 @@ Just as you can delete databases with DROP, you can use DROP to delete a user al
 
     SELECT COUNT(DISTINCT rating)FROM film;
 
-    SQL query to print details of the Workers whose FIRST_NAME contains 'a'.
+    --SQL query to print details of the Workers whose FIRST_NAME contains 'a'.
     SELECT * FROM Worker where FIRST_NAME LIKE ‘%a%‘;
 
-    SQL query to print details of the Workers whose FIRST_NAME ends with 'a'.
+    --SQL query to print details of the Workers whose FIRST_NAME ends with 'a'.
     SELECT * FROM Worker where FIRST_NAME LIKE ‘%a’;
 
-    SQL query to print details of the Workers whose FIRST_NAME ends with 'h' and contains six alphabets.
+    --SQL query to print details of the Workers whose FIRST_NAME ends with 'h' and contains six alphabets.
     SELECT * FROM Worker where FIRST_NAME LIKE '%h%' AND   LENGTH(FIRST_NAME) = 6 ;
 
-    SQL query to print details of the Workers who have joined in Feb’2014
+    --SQL query to print details of the Workers who have joined in Feb’2014
     SELECT * FROM Worker where year(JOINING_DATE) ='2014' and month(JOINING_DATE) = '2';
+    
+    --To print details of workers excluding first names, "Vipul" and "Satish" from Worker table.
+    SELECT * FROM Worker where FIRST_NAME NOT IN(‘Vipul’,‘Satish’);
     
 
     Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
@@ -103,6 +107,13 @@ Just as you can delete databases with DROP, you can use DROP to delete a user al
 <p>When we need to replace, the pattern is (string from which replacement is to be done,old string,new one to be repalced with )</p>
 <pre><code lang ="python">SELECT REPLACE(FIRST_NAME,'A','a')from Worker;</code></pre>
 
+<p class = "descText">
+    <pre><code lang = 'SQL'>
+    -- To just print the date from the date section of database where there is date and time both ,use the function DATE(column name):
+    SELECT DATE(PAYMENT_DATE) FROM payment; 
+    </code></pre>
+</p>
+
    <pre><code lang = "python"> mysql> use learn;
 
     mysql> show tables;
@@ -112,28 +123,7 @@ Just as you can delete databases with DROP, you can use DROP to delete a user al
     | student         |
     +-----------------+
     1 row in set (0.00 sec)</code></pre>
-    <!-- <pre><code lang = "python">mysql> select * from student;
-    </code></pre>
-    <table> -->
-        <!-- <tr>
-            <th>id</th>
-            <th>city</th>
-            <th>name</th>
-            <th>country</th>
-        </tr>
-        <tr>
-            <td>23</td>
-            <td>ankit</td>
-            <td>delhi</td>
-            <td>ind</td>
-        </tr>
-        <tr>
-            <td>24</td>
-            <td>sanket</td>
-            <td>lukhnow</td>
-            <td>india</td>
-        </tr>
-    </table> -->
+    
 <pre><code lang = "python">
 mysql> select * from student;
 +----------+---------+---------+---------+
@@ -285,6 +275,7 @@ The following SQL statement selects all customers with a City starting with any 
 Example
 SELECT * FROM Customers
 WHERE City LIKE '_ondon';
+lIKE IS CASE SENSITIVE WHEN ILIKE IS NOT. when instead of LIKE WE USE ILIKE IT DOESNOT MATTER WHETHER WE ARE SEARCHING FOR 'J' OR 'j'.Underscore allows only single character replacement but we can use many underscores at once.
 
 mysql> select MIN(id) from student;
 +---------+
@@ -329,4 +320,22 @@ mysql> select name from student where id = (select MAX(id) from student) ;
         <!-- Now we can use mysql syntaxes -->
         .schema let us know of design of our database</code></pre>
 </p>
+<ol>
+    <li>GROUP BY comes after from clause or where clause,not after ORDER BY or others.</li>
+    <li>GROUP BY  should includes all those columns which are included in select statement without using agregate function like MAX,AVG,COUNT.</li>
+    <li>GROUP BY function is not called by agregate functions.  </li>
+    <p class = "descText"><pre><code lang = 'SQL'>select customer_id, count(amount),sum(amount)FROM payment
+        GROUP BY customer_id
+        ORDER BY customer_id;
+If there is some other column also after customer_id,it should be in GROUP BY call too but not count(amount),sum(amount) as they are agregate function.</code></pre></p>
+
+    </ol>
+<video width="420" height="340" controls>
+    <source src="/static/groupBy.mkv" type="video/mp4">
+    Your browser does not support the video tag.
+  </video>
+<video width="420" height="340" controls>
+    <source src="/static/groupByExamples.mkv" type="video/mp4">
+    Your browser does not support the video tag.
+</video>
 {% endblock %}
