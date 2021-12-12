@@ -303,7 +303,6 @@ mysql> select name from student where id = (select MAX(id) from student) ;
 1 row in set (0.00 sec)
 
 </code></pre>
-<p class = "descText">finally join statement which let us query between two or more tables based on something that joins it.</p>
 <a href="static/img/connector.png" target="_blank">
     <img class = "img"src = "/static/img/connector.png"/>
 </a>
@@ -337,7 +336,6 @@ HAVING SUM(amount) > 100
         ORDER BY customer_id;
 If there is some other column also after customer_id,it should be in GROUP BY call too but not count(amount),sum(amount) as they are agregate function.</code></pre></p>
 </ol>
-<h3 class='descText'>JOINS</h3>
 <video width="420" height="340" controls>
     <source src="/static/groupBy.mkv" type="video/mp4">
     Your browser does not support the video tag.
@@ -346,4 +344,23 @@ If there is some other column also after customer_id,it should be in GROUP BY ca
     <source src="/static/groupByExamples.mkv" type="video/mp4">
     Your browser does not support the video tag.
 </video>
+<h3 class='descText'>JOINS</h3>
+<p class = "descText">Finally join statement which let us query between two or more tables based on something that joins it.
+    <dl>
+        <dt>Inner Join</dt>
+        <dd>Inner join produces only the set of records that match in both Table A and Table B.</dd>
+        <pre><code lang = 'SQL'></code></pre>
+        <dt>full outer join</dt>
+        <dd>Full outer join produces the set of all records in Table A and Table B, with matching records from both sides where available getting repeated.We use it too when we want to have unique records in both tables that is not available in either of them using WHERE.</dd>
+        <pre><code lang = 'SQL'>
+            SELECT * FROM TableB FULL OUTER JOIN TableA ON TableA.col_match = TableA.col_match where TableA.id is null OR TableB.id is null
+        </code></pre>
+        <dt>left outer join</dt>
+        <dd>Left outer join produces a complete set of records from Table A, with only the matching records (where available) in Table B.To produce the set of records only in Table A, but not in Table B, we perform the same left outer join.Order matters in left outer join in contrast to others discussed above.if we want to have record of data available in Table A, but not in Table B,since left outer join joins all the data present in Table A and only the common one from Table B,we can use WHERE clause.The result of this query has a rows in TableB containing null records which means that, those records are not available in TableA,that's why their result is Null.We can use this NULL to query for null records.</dd> </dd>
+        <pre><code lang = 'SQL'>
+        SELECT *FROM TableA LEFT JOIN TableB ON TableA.col_match = TableA.column match WHERE TableB.id is null.
+        </code></pre>
+        <a href='https://blog.codinghorror.com/a-visual-explanation-of-sql-joins/' target ='blank'>for further info</a>
+    </dl>
+</p>
 {% endblock %}
