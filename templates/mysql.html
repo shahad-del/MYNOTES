@@ -97,14 +97,13 @@ Just as you can delete databases with DROP, you can use DROP to delete a user al
 <p class = "descText">Extract 3 characters from a string, starting in position 1:
     <pre><code lang ="python">SELECT SUBSTRING('SQL Tutorial', 1, 3)</code></p>
 <p class = "descText">conactinating<pre><code lang="python">select CONCAT(FIRST_NAME,' ',LAST_NAME)FROM Worker;</code></pre></p>
-
 <p class = "descText">COLLATE let us make our query case sensitive which  normally is insensitive.Here we are querying  for 'a' not 'A' in Amitabh and collate let us do that.We can do it in two ways : One when constructing a  new database and other when we are querying for something.At the time of constructing a database:</p>
 <pre><code lang="python">CREATE DATABASE db_name
-    [[DEFAULT] CHARACTER SET charset_name]
-    [[DEFAULT] COLLATE collation_name]</code></pre>
-<p class = "descText">charset refers to set of symbols and collate is the rules by which they are compared.We can't have any collation name.There is certain list of collation name and charset rules which we are bound to use.    </p>
+[[DEFAULT] CHARACTER SET charset_name]
+[[DEFAULT] COLLATE collation_name]</code></pre>
+<p class = "descText">charset refers to set of symbols and collate is the rules by which they are compared.We can't have any collation name.There is certain list of collation name and charset rules which we are bound to use.</p>
 <pre><code lang="python">SELECT POSITION('a' in (SELECT FIRST_NAME FROM WORKER WHERE FIRST_NAME COLLATE utf8mb4_0900_as_cs ='Amitabh')COLLATE utf8mb4_0900_as_cs)</code></pre></pre>
-<p>When we need to replace, the pattern is (string from which replacement is to be done,old string,new one to be repalced with )</p>
+<p class = "descText">When we need to replace, the pattern is (string from which replacement is to be done,old string,new one to be repalced with )</p>
 <pre><code lang ="python">SELECT REPLACE(FIRST_NAME,'A','a')from Worker;</code></pre>
 
 <p class = "descText">
@@ -189,7 +188,7 @@ mysql> select name as  "USERNAME" , city as "CITYNAME" from student ;
     6 rows in set (0.00 sec)
 </code></pre> 
 Here 'as' works as ALIAS.It is allowed to be used only in SELECT statement.  
-<pre><code lang = "python">
+<p><pre><code lang = "python">
 mysql> select name as  "USERNAME" , city as "CITYNAME" from student ;
 +----------+----------+
 | USERNAME | CITYNAME |
@@ -302,7 +301,7 @@ mysql> select name from student where id = (select MAX(id) from student) ;
 +-----------+
 1 row in set (0.00 sec)
 
-</code></pre>
+</code></pre></p>
 <a href="static/img/connector.png" target="_blank">
     <img class = "img"src = "/static/img/connector.png"/>
 </a>
@@ -310,8 +309,7 @@ mysql> select name from student where id = (select MAX(id) from student) ;
 <p class = "descText">SELECT UPPER(FIRST_NAME) FROM worker</p>   
 </p>
 <p class = "descText">Converting CSV file into MySQL database:</p>
-<p class = "descText">
-    <pre><code class="SQL">sqlite3 name of database
+<p class = "descText"><pre><code class="SQL">sqlite3 name of database
 sqlite3 favorites.db
 .mode csv
 .import "csv file name" "sheet name where csv file will be converted into into a database"
@@ -337,11 +335,11 @@ HAVING SUM(amount) > 100
 If there is some other column also after customer_id,it should be in GROUP BY call too but not count(amount),sum(amount) as they are agregate function.</code></pre></p>
 </ol>
 <video width="420" height="340" controls>
-    <source src="/static/groupBy.mkv" type="video/mp4">
+    <source src="/static/videos/groupBy.mkv" type="video/mp4">
     Your browser does not support the video tag.
   </video>
 <video width="420" height="340" controls>
-    <source src="/static/groupByExamples.mkv" type="video/mp4">
+    <source src="/static/videos/groupByExamples.mkv" type="video/mp4">
     Your browser does not support the video tag.
 </video>
 <h3 class='descText'>JOINS</h3>
@@ -349,18 +347,49 @@ If there is some other column also after customer_id,it should be in GROUP BY ca
     <dl>
         <dt>Inner Join</dt>
         <dd>Inner join produces only the set of records that match in both Table A and Table B.</dd>
-        <pre><code lang = 'SQL'></code></pre>
-        <dt>full outer join</dt>
+        <pre><code lang = 'SQL'>
+SELECT DISTINCT(title) FROM film inner join inventory ON film.film_id = inventory.film_id ORDER BY title;
+-- DOUBLE INNER JOIN SYNTAX
+SELECT title,first_name,last_name FROM film_actor INNER JOIN actor ON film_actor.actor_id= actor.actor_id INNER JOIN film ON film_actor.film_id = film.film_id WHERE first_name = 'Nick' and last_name = 'Wahlberg';</code></pre>
+        <dt>Full outer join</dt>
         <dd>Full outer join produces the set of all records in Table A and Table B, with matching records from both sides where available getting repeated.We use it too when we want to have unique records in both tables that is not available in either of them using WHERE.</dd>
         <pre><code lang = 'SQL'>
-            SELECT * FROM TableB FULL OUTER JOIN TableA ON TableA.col_match = TableA.col_match where TableA.id is null OR TableB.id is null
+SELECT * FROM TableB FULL OUTER JOIN TableA ON TableA.col_match = TableA.col_match where TableA.id is null OR TableB.id is null
         </code></pre>
-        <dt>left outer join</dt>
+        <dt>Left outer join</dt>
         <dd>Left outer join produces a complete set of records from Table A, with only the matching records (where available) in Table B.To produce the set of records only in Table A, but not in Table B, we perform the same left outer join.Order matters in left outer join in contrast to others discussed above.if we want to have record of data available in Table A, but not in Table B,since left outer join joins all the data present in Table A and only the common one from Table B,we can use WHERE clause.The result of this query has a rows in TableB containing null records which means that, those records are not available in TableA,that's why their result is Null.We can use this NULL to query for null records.</dd> </dd>
         <pre><code lang = 'SQL'>
-        SELECT *FROM TableA LEFT JOIN TableB ON TableA.col_match = TableA.column match WHERE TableB.id is null.
-        </code></pre>
+SELECT *FROM TableA LEFT JOIN TableB ON TableA.col_match = TableA.column match WHERE TableB.id is null.</code></pre>
+        <dt>Union</dt>
+        <dd>Union operator is used to combine the result-set of two or more SELECT statements.</dd>
+<pre><code lang = 'SQL'>SELECT * FROM registrations UNION SELECT * FROM Worker</code></pre>
         <a href='https://blog.codinghorror.com/a-visual-explanation-of-sql-joins/' target ='blank'>for further info</a>
     </dl>
 </p>
+<h3 class='descText'>TimeStamps</h3>
+<p class = "descText">
+    <pre><code lang = 'SQL'>select now()
+select TIMEOFDAY()
+select current_time
+select current_date</code></pre>
+</p>
+<p class = "descText">Let us explore extracting information from time based data type using:
+<ol><li>EXTRACT()</li>
+    <li>AGE()</li>
+    <li>TO_CHAR()</li>
+</ol>
+Extract allows us to extract sub-component of a date-value.
+<pre><code lang = 'SQL'>SELECT EXTRACT(YEAR FROM payment_date) AS year
+from payment;</code></pre>
+TO_CHAR convert data types to text.
+<pre><code lang ='SQL'>SELECT TO_CHAR(payment_date,'MONTH YYYY') FROM payment</code></pre>
+<a href= 'https://www.postgresql.org/docs/13/functions-formatting.html'>Template Patterns for Date/Time Formatting for TO_Char function.</a></p>
+<h3>SELF JOIN</h3>
+<p class = "descText">SELF-JOIN allows us to join different column of the same table.Alias is important in self-join as we taking columns of same table,so different name is necessary to differentiate between them.</p>
+<pre><code lang ='SQL'>SELECT movie.title,next.title,movie.length FROM film as movie join film as next ON
+movie.film_id != next.film_id AND movie.length = next.length</code></pre>
+<video width="420" height="340" controls>
+    <source src="/static/videos/self-join.mkv" type="video/mp4">
+    Your browser does not support the video tag.
+</video>
 {% endblock %}
