@@ -55,24 +55,52 @@ Just as you can delete databases with DROP, you can use DROP to delete a user al
     drop database [db_name]
     
     create table [table_name] (col1 , col2, col3 , col4......);
-    eg user
+    General syntax while creating table :
+    create table table_name(
+        column_name dataType(int,text,varchar), column_constraint(see constraints_example video),
+        last row doesn't include comma
+    )
+    --When in type we fill up (SERIAL which is appropriate for primary key constraint , we don't need to provide  any value for it as it automatically gets filled and incremented.)
     
     show tables;
     desc [tb_name]; it describes the table.
     drop table [table_name];
     
+    --ALTER CLAUSE allows for change to an existing table structure like adding,dropping,renaming columns,changing data types,rename table
     alter table [old table name] rename to [new name];
+    ALTER TABLE WORKER RENAME COLUMN PERSON TO pages
+    alter table [table_name] add col1;
+
+    -- when we have to alter the constraints of the table:
+    ALTER TABLE WORKER ALTER COLUMN pages DROP NOT NULL
+    
     truncate table [table_name];
     
     insert into [table_name](id,name,city) values(12,'durgesh','delhi');  
     -- SQL INSERT INTO Statement is used to add new rows of data to a table in the database.
     insert into [table_name] values(12,'ankit','kanpur');
     
-    alter table [table_name] add col1;
+    
     update [table_name] set col= value , col = value where col=value;
     UPDATE favorites SET title="toy story first" where Title="Toy Story";
 
+    --When we want to update according to information in another table:
+    UPDATE table_name SET column_name = name of other table (.)the column from which we are retrieving the info
+    from other table_name
+    where both table_names whose info are same and can be used to join each other.
+
+    UPDATE account_job
+    SET hire_date = account.created_on
+    FROM account
+    WHERE account_job.user_id = account.user_id
+
     delete from [table_name] where col=value;
+    --We can delete rows based on their presence in other tables too.
+    DELETE FROM TableA USING TableB WHERE tableA.id = TableB.id;
+
+    --we can delete and return it too containing the information about rows deleted just like update.
+    DELETE FROM Job WHERE job_name = 'doc'
+    returning job_id,job_name;
 
     SELECT COUNT(DISTINCT rating)FROM film;
 
@@ -385,11 +413,48 @@ TO_CHAR convert data types to text.
 <pre><code lang ='SQL'>SELECT TO_CHAR(payment_date,'MONTH YYYY') FROM payment</code></pre>
 <a href= 'https://www.postgresql.org/docs/13/functions-formatting.html'>Template Patterns for Date/Time Formatting for TO_Char function.</a></p>
 <h3>SELF JOIN</h3>
-<p class = "descText">SELF-JOIN allows us to join different column of the same table.Alias is important in self-join as we taking columns of same table,so different name is necessary to differentiate between them.</p>
+<p class = "descText">SELF-JOIN allows us to join different column of the same table.Alias is important in self-join as we are taking columns of same table,so different name is necessary to differentiate between them.</p>
 <pre><code lang ='SQL'>SELECT movie.title,next.title,movie.length FROM film as movie join film as next ON
 movie.film_id != next.film_id AND movie.length = next.length</code></pre>
 <video width="420" height="340" controls>
     <source src="/static/videos/self-join.mkv" type="video/mp4">
     Your browser does not support the video tag.
 </video>
+<h3>Constraints</h3>
+<p class="descText">Constraints are rules enforced on tables and columns. These are used to prevent invalid data being entered into the database.Two categories of it are:column constraints and table constraints.Most common constraints are:</p>
+<h3>column constraints</h3>
+<ol>
+    <li>NOT NULL</li>
+    <li>UNIQUE</li>
+    <li>primary key</li>
+    <li>foreign key</li>
+    <li>check constraint</li>
+    <li>Exclusion</li>   
+</ol>
+<h3>Table constraints</h3>
+<ol>
+    <li>check</li>
+    <li>references</li>
+    <li>unique</li>
+    <li>primary key</li>
+</ol>
+<p class = "descText"> Primary key is unique to the table where as through foreign key we connect to other tables.While using forign key we use key word 'REFERENCES' and has to make sure that the value is same as the table to which it is referencing.</p>
+<video width="420" height="340" controls>
+    <source src="/static/videos/constraints.mkv" type="video/mp4">
+    Your browser does not support the video tag.
+</video>
+<video width="420" height="340" controls>
+    <source src="/static/videos/constraintsExample.mkv" type="video/mp4">
+    Your browser does not support the video tag.
+</video>
+
+<h3>syntax of check constraint:</h3>
+<pre><code lang = 'SQL'>CREATE Table employees(
+emp_id SERIAL PRIMARY KEY,
+first_name varchar(50) NOT NULL UNIQUE,
+last_name varchar(50) NOT NULL,
+birthdate DATE check(birthdate > '1900-01-01'),
+hire_date DATE check (hire_date > birthdate),
+salary INTEGER check(salary > 0)
+)</code></pre>
 {% endblock %}
