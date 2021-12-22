@@ -74,6 +74,11 @@ Just as you can delete databases with DROP, you can use DROP to delete a user al
     -- when we have to alter the constraints of the table:
     ALTER TABLE WORKER ALTER COLUMN pages DROP NOT NULL
     
+    --when we have forgotten to add  certain constraints to the table:
+    ALTER TABLE TABLE_NAME
+    ADD constaint_type (column_name);
+    ALTER TABLE Students ADD UNIQUE(email);
+    
     truncate table [table_name];
     
     insert into [table_name](id,name,city) values(12,'durgesh','delhi');  
@@ -412,6 +417,12 @@ from payment;</code></pre>
 TO_CHAR convert data types to text.
 <pre><code lang ='SQL'>SELECT TO_CHAR(payment_date,'MONTH YYYY') FROM payment</code></pre>
 <a href= 'https://www.postgresql.org/docs/13/functions-formatting.html'>Template Patterns for Date/Time Formatting for TO_Char function.</a></p>
+<p class = 'descText'>Few links to take notice of:</p>
+<ul>
+<li><a href = 'https://www.postgresql.org/docs/9.5/functions-string.html'>string functions and operators</a></li>
+<li><a href = 'https://www.postgresql.org/docs/9.5/functions-datetime.html'>datetime</a></li>
+<li><a href = 'https://www.postgresql.org/docs/9.5/functions-numeric.html'>Numeric</a></li>
+</ul>
 <h3>SELF JOIN</h3>
 <p class = "descText">SELF-JOIN allows us to join different column of the same table.Alias is important in self-join as we are taking columns of same table,so different name is necessary to differentiate between them.</p>
 <pre><code lang ='SQL'>SELECT movie.title,next.title,movie.length FROM film as movie join film as next ON
@@ -457,4 +468,83 @@ birthdate DATE check(birthdate > '1900-01-01'),
 hire_date DATE check (hire_date > birthdate),
 salary INTEGER check(salary > 0)
 )</code></pre>
+<h3>Condtional expressions and procedures</h3>
+<p class = "descText"> We can use CASE statements only when we have certain conditions.It is like if and else statements.There are two main ways of using CASE statements,either using general CASE OR through CASE expression.General case allows all kind of comparisons like between,greater than and many more.  </p><h3>Syntax for general CASE is:</h3>
+<pre><code lang = "SQL">select column_name,
+CASE
+    WHEN condition1 THEN  result1
+    WHEN condition2 THEN  result2
+    ELSE some_other _result
+    END FROM TABLE_NAME
+SELECT WORKER,
+CASE 
+    WHEN WORKER = 'JONES' THEN '1ST'
+    CASE WHEN WORKER = 'JACK' THEN '2ND'
+    ELSE 'OTHER'
+    END FROM COMPANY;
+select customer_id,
+case 
+    when customer_id < 100 THEN 'PREMIUM'
+    WHEN customer_id BETWEEN 100 AND 200 THEN 'PLUS'
+    ELSE 'NORMAL'
+    END AS Customer_Category
+    from customer;    
+</code></pre>
+<pre>Unlike general Case,Case expression  checks only for one condition like equal to. </pre>
+<h3>Syntax for CASE expression:</h3>
+<pre><code lang ='SQL'>
+SELECT column_name,
+CASE expression
+    WHEN value1 THEN  result1
+    WHEN value2 THEN  result2
+    ELSE some_other_result
+    END FROM TABLE_NAME;
+SELECT WORKER,
+CASE WORKER 
+    WHEN 1 THEN 'JONES'
+    WHEN 2 THEN 'JACK'
+    ELSE 'OTHER'
+    END FROM COMPANY;
+SELECT 
+ SUM(case rental_rate
+    when 0.99 THEN 1
+    ELSE 0
+    END) as bargains,
+ SUM(case rental_rate
+    when 4.99 THEN 1
+    ELSE 0
+    END) as premium
+    from film
+</code></pre>
+<h3>COALESCE FUNCTION</h3>
+<p class="descText">COALESCE FUNCTION accepts unlimited number of arguments.It returns the first argument that is not null and if all arguments are null then the function will return null.It  becomes useful when we are querying a table that contains null values and want to  substitute with another value.For example we have table of products and want to find out the final cost after discount have been given but there is one column where the amount of discount is not mentioned .In such cases coaslesce function is useful and makes us easier to work with NULL values. </p>
+<pre><code lang = 'SQL'>
+SELECT item,(price - COALESCE(discount,0))
+</code></pre>
+<h3> CAST</h3>
+<p class = "descText">CAST operator let us convert from one data type to another but we have to keep in mind that all data type  cannot be CAST to another data type.For example it is reasonable to convert string '5' to integer 5 not string'five'.Though it is more appropriate to use CAST in a column name instead of a single instance as said in the example.</p>
+<pre><code lang = 'SQL'>
+SQL CAST SYNTAX
+SELECT CAST('5' AS INTEGER)
+select CHAR_LENGTH(cast(inventory_id AS VARCHAR)) from rental;
+POSTGRESQL CAST SYNTAXE
+SELECT '5':: INTEGER
+select CHAR_LENGTH(inventory_id :: VARCHAR )from rental;
+</code></pre>
+<h3>View</h3>
+<p class = "descText">
+Often we have to keep querying complex combination of tables and conditions again and again.Instead of performing same query again and again ,we can create a VIEW and just use it instead of writing all those syntaxes again.VIEW doesn't store data physically,it simply stores the query. 
+</p>
+<pre><code lang = 'SQL'>
+create view view_example AS
+SELECT first_name,last_name,address FROM customer 
+INNER JOIN address
+ON customer.address_id = address.address_id
+select * from view_example
+</code></pre>
+<h3>IMPORT/EXPORT in POSTGRESQL</h3>
+<video width="420" height="340" controls>
+    <source src="/static/videos/import_export.mkv" type="video/mp4">
+    Your browser does not support the video tag.
+</video>
 {% endblock %}
