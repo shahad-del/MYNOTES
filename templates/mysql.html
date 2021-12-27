@@ -124,6 +124,36 @@ Just as you can delete databases with DROP, you can use DROP to delete a user al
     --To print details of workers excluding first names, "Vipul" and "Satish" from Worker table.
     SELECT * FROM Worker where FIRST_NAME NOT IN(‘Vipul’,‘Satish’);
     
+    -- To find even or odd number of tables. MOD() function is used to get the remainder from a division. 
+    select * from Worker where MOD(WORKER_ID,2.0) != 0;
+
+    --To make clone of the table.
+    CREATE TABLE worker_clone SELECT * FROM worker;
+
+    -- To add foreign key in the table.INVENTORY_ITEM_ID column NAME REFERENCES TO ID COLUMN OF ITEM TABLE.
+    create table inventory(id serial primary key,inventory_item_id integer references item(id),Quantity integer not null,Price numeric not null,unit varchar(10))
+
+  
+    --SQL query to determine the 5th highest salary.OFFSET ignores the number of rows mentioned.
+    select FIRST_NAME,SALARY from Worker order by SALARY DESC limit 1 offset 4 ;
+
+    --list of employees with the same salary.
+    select * from 
+    (SELECT FIRST_NAME,
+    first_value(SALARY) 
+    OVER(
+    PARTITION BY SALARY) as salary,
+    count(SALARY) 
+    OVER(
+    PARTITION BY SALARY) as c
+    FROM Worker) t where t.c > 1
+
+    -- departments that have less than five people in it.
+    select department,count(first_name) as c from worker  GROUP by department HAVING c < 4;
+
+    the name of employees having the highest salary in each department.
+    select * from worker where (department,salary) IN (select department ,max(salary) from worker group by department) ;
+
 
     Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
     </code></pre></p>
@@ -382,6 +412,8 @@ If there is some other column also after customer_id,it should be in GROUP BY ca
         <dd>Inner join produces only the set of records that match in both Table A and Table B.</dd>
         <pre><code lang = 'SQL'>
 SELECT DISTINCT(title) FROM film inner join inventory ON film.film_id = inventory.film_id ORDER BY title;
+-- we can use USING too in INNER JOIN
+SELECT DISTINCT(title) FROM film inner join inventory USING(film_id)ORDER BY title;
 -- DOUBLE INNER JOIN SYNTAX
 SELECT title,first_name,last_name FROM film_actor INNER JOIN actor ON film_actor.actor_id= actor.actor_id INNER JOIN film ON film_actor.film_id = film.film_id WHERE first_name = 'Nick' and last_name = 'Wahlberg';</code></pre>
         <dt>Full outer join</dt>
@@ -395,7 +427,11 @@ SELECT * FROM TableB FULL OUTER JOIN TableA ON TableA.col_match = TableA.col_mat
 SELECT *FROM TableA LEFT JOIN TableB ON TableA.col_match = TableA.column match WHERE TableB.id is null.</code></pre>
         <dt>Union</dt>
         <dd>Union operator is used to combine the result-set of two or more SELECT statements.</dd>
-<pre><code lang = 'SQL'>SELECT * FROM registrations UNION SELECT * FROM Worker</code></pre>
+<pre><code lang = 'SQL'>SELECT * FROM registrations UNION SELECT * FROM Worker
+--shows one row twice in results from a table.Union erases duplicates whereas UNION ALL includes all.
+select  * from Worker UNION all select * from Worker order by first_name
+
+</code></pre>
         <a href='https://blog.codinghorror.com/a-visual-explanation-of-sql-joins/' target ='blank'>for further info</a>
     </dl>
 </p>
@@ -547,4 +583,22 @@ select * from view_example
     <source src="/static/videos/import_export.mkv" type="video/mp4">
     Your browser does not support the video tag.
 </video>
+
+<h3>Top Interview Keywords in Sql</h3>
+<ul>
+    <li>Select/ Insert Delete queries</li>
+    <li>DateTime functions (Day of a date, formatting datetimes, parsing datetimes)</li>
+    <li>Cursors</li>
+    <li>Ranking functions</li>
+    <li>PartitionBy / GroupBy / Joins queries</li>
+    <li>PROCEDURES and Functions</li>
+    <li>Create table syntax/ Create Proc syntax</li>
+    <li>Update/Alter table/proc/functions queries</li>
+    <li>Procs vs functions</li>
+    <li>Call procs(call)</li>
+    <li>call functions (select )</li>
+    <li>DDL(CREATE/ALTER/DROP) vs DML(SELECT/INSERT/UPDATE/DELETE) commands</li>
+    <li>Indexes and Constraints</li>
+    <li>Database Normalization (1st degree, 2nd degree, 3 degree normalization)</li>
+</ul>
 {% endblock %}
