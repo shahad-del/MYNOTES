@@ -138,5 +138,15 @@ git add .
 git commit -m "msg" 
 git push
 </code></pre>
-
+<h3>When running postgresql through commandline.Few shortcuts are:</h3>
+<p class = "descText">
+<pre><code lang="SQL">
+\x turns on expanded display in the logged in database i.e test here.That means tables showing all columns in one line,shows it in blocks each block containting all information of the columns in seperate lines.
+test=# \x
+Expanded display is on.
+\c connects to the database.
+psql -U username:password let use login as specific user in psql.
+ctrl l to clear the screen.
+</code></pre>
+</p>
 {% endblock %}

@@ -76,8 +76,11 @@ Just as you can delete databases with DROP, you can use DROP to delete a user al
     
     --when we have forgotten to add  certain constraints to the table:
     ALTER TABLE TABLE_NAME
-    ADD constaint_type (column_name);
+    ADD constraint_type (column_name);
     ALTER TABLE Students ADD UNIQUE(email);
+
+    --we can evn add constraint that checks whether the data filled is in accord with needed information.
+    ALTER TABLE WORKER ADD constraint  gender_constraint check(gender = 'female or gender' = 'male')
     
     truncate table [table_name];
     
@@ -136,6 +139,9 @@ Just as you can delete databases with DROP, you can use DROP to delete a user al
   
     --SQL query to determine the 5th highest salary.OFFSET ignores the number of rows mentioned.
     select FIRST_NAME,SALARY from Worker order by SALARY DESC limit 1 offset 4 ;
+    -- we can even use order by in following sql syntax:
+    select  FIRST_NAME,SALARY  from transaction order by 2 asc
+    -- it will order by second column name i.e. salary
 
     --list of employees with the same salary.
     select * from 
@@ -147,6 +153,9 @@ Just as you can delete databases with DROP, you can use DROP to delete a user al
     OVER(
     PARTITION BY SALARY) as c
     FROM Worker) t where t.c > 1
+                OR
+    Select distinct e.worker_id,e.first_name,e.salary from worker e, worker  e1 where e.salary =e1.salary and e.worker_id != e1.worker_id order by salary
+
 
     -- departments that have less than five people in it.
     select department,count(first_name) as c from worker  GROUP by department HAVING c < 4;
@@ -154,7 +163,30 @@ Just as you can delete databases with DROP, you can use DROP to delete a user al
     the name of employees having the highest salary in each department.
     select * from worker where (department,salary) IN (select department ,max(salary) from worker group by department) ;
 
-
+    -- to order a query by a specific letter using order by:
+    SELECT 
+        pname, pdescription, price
+    FROM
+        products
+    ORDER BY 
+    CASE
+        WHEN pname LIKE 'D%' THEN 1
+        ELSE 2
+    END;
+            OR
+    select q_no,difficulty_level,question,
+    string_agg(options_in_points,',') from category inner join questions on 
+    questions.category_id = category.s_no 
+    inner join multiple_choices
+    on
+    questions.q_no = multiple_choices.question_id
+    group by difficulty_level,question,q_no
+    order by 
+    case when difficulty_level  like 'E%' THEN 1
+        when difficulty_level like 'M%' then 2
+        else 3
+    END
+    -- here 1,2,3 represents the order in which difficulty_level should be sorted.difficulty_level starting with 'E' should come first,then 'M' and then others.
     Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
     </code></pre></p>
 <p class = "descText">Extract 3 characters from a string, starting in position 1:
@@ -375,14 +407,14 @@ mysql> select name from student where id = (select MAX(id) from student) ;
 <p class = "descText"><pre><code class="SQL">sqlite3 name of database
 sqlite3 favorites.db
 .mode csv
-.import "csv file name" "sheet name where csv file will be converted into into a database"
+.import "csv file name" "sheet name where csv file will be converted into,into a database"
 .import favourites.csv favourites
 -- Now we can use mysql syntaxes
 .schema let us know of design of our database</code></pre>
 </p>
 <h3 class = "descText">GROUP_BY AND HAVING</h3>
 <ol>
-    <li>HAVING function comes after GROUP BY FUNCTION and allows us to filter after aggregation has already taken place.Aggregatiion takes place after group by statement,that's why we can't use it with WHERE clause  as it takes place before GROUP BY FUNCTION.To filter out the data on statements based on agregated functions like SUM(amount),we have to use HAVING and that also after GROUP BY FUNCTION.Filter with WHERE statement on SUM amount is not possible.</li>
+    <li>HAVING function comes after GROUP BY FUNCTION and allows us to filter after aggregation has already taken place.Aggregation takes place after group by statement,that's why we can't use it with WHERE clause  as it takes place before GROUP BY FUNCTION.To filter out the data on statements based on agregated functions like SUM(amount),we have to use HAVING and that also after GROUP BY FUNCTION.Filter with WHERE statement on SUM amount is not possible.</li>
     <p class = "descText">
 <pre><code lang = 'SQL'>
 SELECT customer_id,sum(amount) FROM payment
@@ -445,13 +477,18 @@ select current_date</code></pre>
 <p class = "descText">Let us explore extracting information from time based data type using:
 <ol><li>EXTRACT()</li>
     <li>AGE()</li>
-    <li>TO_CHAR()</li>
+    <li>TO_CHAR()</li> 
 </ol>
 Extract allows us to extract sub-component of a date-value.
-<pre><code lang = 'SQL'>SELECT EXTRACT(YEAR FROM payment_date) AS year
-from payment;</code></pre>
+<pre><code lang = 'SQL'>SELECT EXTRACT(YEAR FROM payment_date) AS year from payment;
+select *, extract(month from sold_on) as day_week from transaction  where sold_at = 200  </code></pre>
 TO_CHAR convert data types to text.
 <pre><code lang ='SQL'>SELECT TO_CHAR(payment_date,'MONTH YYYY') FROM payment</code></pre>
+<video width="420" height="340" controls>
+    <source src="/static/videos/timestamp.mkv" type="video/mp4">
+    Your browser does not support the video tag.
+</video>
+<h3>Time,Date,Extract,Interval</h3>
 <a href= 'https://www.postgresql.org/docs/13/functions-formatting.html'>Template Patterns for Date/Time Formatting for TO_Char function.</a></p>
 <p class = 'descText'>Few links to take notice of:</p>
 <ul>
@@ -465,6 +502,16 @@ TO_CHAR convert data types to text.
 movie.film_id != next.film_id AND movie.length = next.length</code></pre>
 <video width="420" height="340" controls>
     <source src="/static/videos/self-join.mkv" type="video/mp4">
+    Your browser does not support the video tag.
+</video>
+<h3>subQueryAndExists</h3>
+<video width="420" height="340" controls>
+    <source src="/static/videos/subQueryAndExists.mkv" type="video/mp4">
+    Your browser does not support the video tag.
+</video>
+<p>On conflict function that's very useful when inserting and checking if the data inserted already exists or not and if yes then update it to given info.</p>
+<video width="420" height="340" controls>
+    <source src="/static/videos/on_conflict_update.mkv" type="video/mp4">
     Your browser does not support the video tag.
 </video>
 <h3>Constraints</h3>
@@ -583,6 +630,11 @@ select * from view_example
     <source src="/static/videos/import_export.mkv" type="video/mp4">
     Your browser does not support the video tag.
 </video>
+<video width="420" height="340" controls>
+    <source src="/static/videos/export_our_data_as_csvFile.mkv" type="video/mp4">
+    Your browser does not support the video tag.
+</video>
+
 
 <h3>Top Interview Keywords in Sql</h3>
 <ul>
