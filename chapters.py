@@ -21,5 +21,8 @@ def commandline() -> 'html':
 @app.route('/csv')
 def csv() -> 'html':
     return render_template('csv.html')
+@app.route('/connectingToDatabase')
+def connectingToDatabase() -> 'html':
+    return render_template('connectingToDatabase.html')
 if __name__ == '__main__':
     app.run(debug=True,port=8080)

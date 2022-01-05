@@ -1,0 +1,78 @@
+{% extends 'basis.html' %}
+{% block title %}
+<title>ConnectingToDatabase</title>
+{% endblock %}
+{% block body %}
+<h3>Connecting to postgres database</h3>
+<p class = "descText"><pre><code lang="python">
+    import psycopg2
+    db_host = 'localhost'
+    db_name = 'quiz'
+    db_user = 'postgres'
+    db_pass = 'password'
+    conn = psycopg2.connect(dbname= db_name, user=db_user, password=db_pass,host=db_host)
+    cur = conn.cursor()
+    cur.execute(""" select question  as easy from questions inner join category on  category.s_no = questions.category_id where category_id = 1;
+     """)
+    cur.execute(""" select question  as easy,STRING_AGG(options_in_points,',') from questions inner join category on  category.s_no = questions.category_id 
+    inner join multiple_choices on questions.q_no = multiple_choices.question_id where category_id = 1 Group by question;
+    """)
+    query = cur.fetchall()
+    print(query)
+    cur.close()
+    conn.close 
+</code></pre></p>
+<p class = "descText">When we want to include variable in a query:
+<pre><code lang='python'>
+    @app.route('/questions',methods = ['POST'])
+    def questions() -> 'html':
+    
+        selectedLevel = request.form.get('difficulty_level')
+    
+    
+        submittedAnswers = request.form.getlist('choices')
+    
+        conn = psycopg2.connect(dbname= db_name, user=db_user, password=db_pass,host=db_host)
+        cur = conn.cursor()
+        questionWithChoicesQuery = """
+        select
+            q.q_no as question_id, 
+            q.question  as QuestionText,
+            c.options_in_points as choice,
+            c.id as choice_id
+        from questions q
+        inner join category on 
+            category.s_no = q.category_id 
+        inner join multiple_choices c on 
+            q.q_no = c.question_id 
+        where 
+            category_id = %(levelId)s;"""
+    
+        cur.execute(questionWithChoicesQuery, {'levelId': selectedLevel})
+        questionList = cur.fetchall()
+        structuredData = reformat_data(questionList)
+        return render_template('questions.html',questions = structuredData)   
+</code></pre>    
+</p>
+<p class = "descText">
+    When we want to edit the data collected from user input,it is must that we keep our button type to submit and wrap it in a form tag.In form tag we have to include action that determines where we want our collected data to be submitted.Method needs to be POST if we want to update,edit those data.
+<pre><code lang ="sql">
+    {%raw %}
+      <form action="/questions" method="post">
+        <label for="difficulty_level">Choose the difficulty level</label>
+        <select id="difficulty_level" name="difficulty_level">
+          {% for c in categories %}
+          <option value="{{c[0]}}" id="{{c[0]}}">{{c[1]}}</option>   
+          {% endfor %}
+        </select>
+        <button class="app-button" type="submit">Begin Quiz</button>
+      </form>
+    {%endraw%}
+</code></pre>
+</p>
+<h3>creating and downloading dummy data through mockaroo</h3>
+<video width="420" height="340" controls>
+    <source src="/static/videos/mockaroo_data.mkv" type="video/mp4">
+    Your browser does not support the video tag.
+</video>
+{% endblock %}
