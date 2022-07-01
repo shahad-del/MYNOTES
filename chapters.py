@@ -24,5 +24,8 @@ def csv() -> 'html':
 @app.route('/connectingToDatabase')
 def connectingToDatabase() -> 'html':
     return render_template('connectingToDatabase.html')
+@app.route('/python')
+def pythonessentials() -> 'html':
+	return render_template('python.html')
 if __name__ == '__main__':
     app.run(debug=True,port=8080)

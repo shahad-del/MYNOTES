@@ -21,3 +21,6 @@ def commandline() -> 'html':
 @app.route('/csv')
 def csv() -> 'html':
     return render_template('csv.html')
+@app.route('/pythonessentials')
+def pythonessentials() -> 'html':
+	return render_template('python.html')
