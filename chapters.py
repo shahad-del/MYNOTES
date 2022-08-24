@@ -27,5 +27,8 @@ def connectingToDatabase() -> 'html':
 @app.route('/python')
 def pythonessentials() -> 'html':
 	return render_template('python.html')
+@app.route('/css')
+def css() -> 'html':
+	return render_template('css.html')
 if __name__ == '__main__':
     app.run(debug=True,port=8080)
