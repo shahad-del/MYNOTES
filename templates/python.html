@@ -16,5 +16,14 @@
 <a href="/static/img/attributesMethods.png" target ="blank"><img class = "img" src = "/static/img/attributesMethods.png"></a>
 <a href="/static/img/hasAndDoes.png" target ="blank"><img class = "img" src = "/static/img/hasAndDoes.png"></a>
 <a href="/static/img/classAndObj.png" target ="blank"><img class = "img" src = "/static/img/classAndObj.png"></a>
+<p>Python eval() function parse the expression argument and evaluate it as a python expression and runs Python expression(code), If the expression is an int representation, Python converts the argument to an integer.</p>
+<pre><code lang ="python">
+lis = ['1', '-4', '3', '-6', '7']
+res = [eval(i) for i in lis]
+print("Modified list is: ", res)
+Output:
 
+Modified list is: [1, -4, 3, -6, 7]
+
+</code></pre>
 {% endblock %}
