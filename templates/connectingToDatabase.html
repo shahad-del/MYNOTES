@@ -173,4 +173,21 @@ class Drinks(db.Model):
 	drink=Drinks.query.get_or_404(id)
 	return{"name":drink.name, "description":drink.description}
 	</pre></p>
+
+<h3>
+	pip install -r requirements.txt.This command will install all the files in requirements.txt folder.
+</h3>	
+<p class = "descText"><pre><code lang="python"></code>
+click==7.1.2
+Flask==1.1.2
+Flask-RESTful==0.3.8
+Flask-SQLAlchemy==2.4.3
+itsdangerous==1.1.0
+Jinja2==2.11.2
+MarkupSafe==1.1.1
+pytz==2020.1
+six==1.15.0
+SQLAlchemy==1.3.18
+Werkzeug==1.0.1
 {% endblock %}
+</pre></p>
