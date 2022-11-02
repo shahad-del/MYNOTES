@@ -126,6 +126,51 @@
 	pip3 freeze > requirements.txt
 </pre></p>
 
+<h3>
+	configuration for starting rest API
+</h3>
+<p class = "descText"><pre><code lang="python"></code>
+from flask import Flask,request
+from flask_sqlalchemy import SQLAlchemy
+app = Flask(__name__)
+app.config['SQLALCHEMY_DATABASE_URI']='sqlite:///data.db'
+db = SQLAlchemy(app)
+
+class Drinks(db.Model):
+	
+		id = db.Column(db.Integer, primary_key=True)
+		name = db.Column(db.String(80),unique=True,nullable=False)
+		description = db.Column(db.String(120))
+
+		def __repr__(self):
+			return f"{self.name} - {self.description}"
+</pre></p>
+
+<h3>Now  to create database,inserting into it,querying into database.</h3>
+<p class = "descText"><pre><code lang="python"></code>
+	If any error occurs type [app.app_context().push()] after importing
+	from app import db,app,Drinks
+	db.create_all()
+	d = Drinks(name='grape',description='tastes sweet')
+	db.session.add(d)
+	db.session.commit()
+	TO QUERY about our database
+	Drink.query.all()
+	</pre></p>
+<h3>To fetch data with python code using database created through API.</h3>
+<p class = "descText"><pre><code lang="python"></code>
+	@app.route('/drinks')
+	def get_drinks():
+	drinks = Drinks.query.all()
+	output = []
+	for drink in drinks:
+		drink_data = {'name': drink.name, 'description': drink.description}
+		output.append(drink_data)
+	return{"drinks":output}
 
 
+	def get_drink(id):
+	drink=Drinks.query.get_or_404(id)
+	return{"name":drink.name, "description":drink.description}
+	</pre></p>
 {% endblock %}
