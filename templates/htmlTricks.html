@@ -1,0 +1,159 @@
+{% extends 'basis.html' %}
+{% block title %}
+<title>html tricks</title>
+{% endblock %}
+{% block body %}
+
+<body>
+	<ol>
+		<li>
+			<p>The summary element should be the first child of the details tag.</p>
+			<details>
+				<summary>Click to open </summary>
+				<p>Hi stranger! I'm the content hidden inside this accordion ;)</p>
+			</details>
+		</li>
+		<li>
+
+			You can use the datalist element to display suggestions for an input element.
+
+			The input's list attribute must be equal to the id of the datalist.
+			<br>
+			<label for="fighter">Pick your fighter</label>
+			<input list="fighters" name="fighter">
+			<datalist id="fighters">
+				<option value="Sub Zero">
+				<option value="Pikachu">
+				<option value="Mario">
+				<option value="Baraka">
+			</datalist>
+
+		</li>
+		<li>
+			Use the mark tag to highlight text. The default color is yellow but you can change it by setting the
+			background-color attribute to any other color you like.
+			<p>Hi dev friend, this is a
+				<mark>highlighted text</mark>
+				made with love by simon paix
+			</p>
+		</li>
+		<li>
+			Use the picture tag to display different images according to the window size.
+			It's useful to make your website more responsive.
+			<picture>
+				<source media="(min-width:1050px)"
+					srcset="https://assets.pokemon.com/assets/cms2/img/pokedex/full/006.png">
+				<source media="(min-width:750px)"
+					srcset="https://assets.pokemon.com/assets/cms2/img/pokedex/full/005.png">
+				<img src="https://assets.pokemon.com/assets/cms2/img/pokedex/full/004.png" alt="Charizard-evolutions"
+					style="width:auto">
+			</picture>
+		</li>
+		<li>
+			<label for="site-search">Search the site:</label>
+			<input type="search" id="site-search" name="q" aria-label="Search through site content">
+
+			<button>Search</button>
+		</li>
+		<li>
+			You can use the meter element to display measured data within a certain range with min/max/low/high values,
+			such as temperature .<br>
+			<label for="fuel">Fuel level:</label>
+			<meter id="fuel" min="0" max="100" low="33" high="66" optimum="80" value="50">
+				at 50/100
+			</meter>
+		</li>
+		<li>
+			You can also create a progress bar using only HTML with the progress element. It can be used in order to
+			show the progress of a task such as a file upload/download.<br>
+			<label for="file">File progress:</label>
+			<progress id="file" max="100" value="70"> 70% </progress>
+		</li>
+		<li>
+			<input type="color" id="color-picker" name="color-picker" value="#e66465">
+			<label for="color-picker">Pick a color</label>
+		</li>
+		<li>
+			Use the poster attribute to specify an image to be shown while the video is downloading, or until the user
+			hits the play button.
+
+			If the image isn't specified, nothing is displayed until the first frame is available, then the first frame
+			is shown as the poster frame.<br>
+			<video controls src="https://bit.ly/3nWh78w" poster="posterImage.png">
+			</video>
+		</li>
+		<li>
+			If you have a long list of options, groups of related options are easier to handle for a user.The "optgroup"
+			tag is used for group-related options in a "select"element (drop-down list).
+			<h1>
+				<form action="">
+					<label for="cars">choose a car:</label>
+					<select name="cars" id="cars">
+						<optgroup label="swedish cars">
+							<option value="volvo">volvo</option>
+							<option value="saab`">saab</option>
+						</optgroup>
+						<optgroup label="German cars">
+							<option value="audi">audi</option>
+							<option value="mercedes">mercedes</option>saab</option>
+							</outgroup>
+					</select>
+				</form>
+		</li>
+		<li>
+			An image map is basically an image with clickable areas. We can use that clickable area to link to other
+			parts of the webpages, to documents, or to a new link.
+
+			Well, not everyone is aware of the fact that the "map" element can define the areas on an image that a user
+			can click. All we need to do is just use the "area" element and mention its corresponding XY coordinates
+			inside it, in the <map> element.
+
+				<h1 style="text-align:center;">World Map</h1>
+				<h4 style="text-align:center;">&#10148; Click on the dots in the map to get respective continent
+					information
+				</h4>
+				<map name="continents_map">
+					<area shape="circle" coords="70,70,10" href="https://en.wikipedia.org/wiki/North_America">
+					<area shape="circle" coords="133,185,10" href="https://en.wikipedia.org/wiki/South_America">
+					<area shape="circle" coords="270,137,10" href="https://en.wikipedia.org/wiki/Africa">
+					<area shape="circle" coords="292,44,10" href="https://en.wikipedia.org/wiki/Europe">
+					<area shape="circle" coords="469,201,10" href="https://en.wikipedia.org/wiki/Australia">
+					<area shape="circle" coords="374,65,10" href="https://en.wikipedia.org/wiki/Asia">
+					<area shape="circle" coords="340,267,10" href="https://en.wikipedia.org/wiki/Antarctica">
+				</map>
+				<figure style="text-align:center;">
+					<img usemap="#continents_map" src=https://bit.ly/2bgFrvL width="600px" />
+				</figure>
+		</li>
+		<li>
+			Tooltip is “a concept used in HTML for showing some extra information about the specifically selected
+			element.”
+
+			This trick basically shows the extra information provided by the site creator when a visitor hovers the
+			mouse pointer over an element.
+			<br>
+			<br>
+			<span title="Can you see this? This is the tooltip.:)">Drag Your Mouse Over Me!</span>
+		</li>	
+		<li>
+			dialog is used for pop up msg.
+			<dialog open>
+			<p>Greetings, one and all!</p>
+			<form method="dialog">
+			  <button>OK</button>
+			</form>
+		  </dialog>
+		</li> 
+		<li>
+			<iframe id="inlineFrameExample"
+    title="Inline Frame Example"
+    width="300"
+    height="200"
+    src="https://www.openstreetmap.org/export/embed.html?bbox=-0.004017949104309083%2C51.47612752641776%2C0.00030577182769775396%2C51.478569861898606&layer=mapnik">
+	</iframe>
+	<br>
+The  iframe HTML element represents a nested browsing context, embedding another HTML page into the current one.
+
+		</li>
+	</ol>
+{% endblock %}

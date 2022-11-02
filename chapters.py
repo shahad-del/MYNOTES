@@ -30,5 +30,8 @@ def pythonessentials() -> 'html':
 @app.route('/css')
 def css() -> 'html':
 	return render_template('css.html')
+@app.route('/html')
+def html() -> 'html':
+	return render_template('htmlTricks.html')
 if __name__ == '__main__':
     app.run(debug=True,port=8080)
