@@ -1,0 +1,150 @@
+{% extends 'basis.html' %}
+{% block title %}
+<title>Jira turorial</title>
+{%endblock%}
+{% block body %}
+<h1>Difference between software development cycle and software test cycle.</h1>
+<img>Software Development Life Cycle (SDLC) is a sequence of different activities performed during the software
+development process.</p>
+<img src="https://media.geeksforgeeks.org/wp-content/uploads/20190712133705/Capture99.jpg"></img>
+<p class="descText"></p>Software Testing Life Cycle (STLC) is a sequence of different activities performed during the software testing
+	process. </p>
+<img src="https://media.geeksforgeeks.org/wp-content/uploads/20190712133813/Capture100.jpg"></img>
+<p class="descText"></p>
+	verification and validation mean in software testing -
+<pre>In software testing, verification is a process to confirm that product development is taking place as per the specifications and using the standard development procedures. The process comprises the following activities:
+
+Inspections
+Reviews
+Walk-throughs
+Demos
+Validation is a means to confirm that the developed product doesn’t have any bugs and is working as expected. It comprises the following activities:
+Functional testing
+Non-functional testing</pre>
+</p>
+<h4>
+	Test plan and what does it include?</h4>
+<pre>A test plan stores all possible testing activities to ensure a quality product. It gathers data from the product description, requirement, and use case documents.
+
+The test plan document includes the following:
+
+Testing objectives
+Test scope
+Testing the frame
+Environment
+Reason for testing
+Criteria for entrance and exit
+Deliverables
+Risk factors
+</pre>
+<p class="descText"></p>unit testing and integration testing?</p>
+<pre>
+Unit testing has many names such as module testing or component testing.
+
+Many times, it is the developers who test individual units or modules to check if they are working correctly.
+
+Whereas, integration testing validates how well two or more units of software interact with each other.
+</pre>
+<p class="descText"></p>
+	What is Alpha Testing?
+<pre>
+Alpha Testing is a type of acceptance testing; performed to identify all possible issues and bugs before releasing the final product to the end users. Alpha testing is carried out by the testers who are internal employees of the organization. The main goal is to identify the tasks that a typical user might perform and test them.
+
+To put it as simple as possible, this kind of testing is called alpha only because it is done early on, near the end of the development of the software, and before beta testing.</pre>
+</p>
+What is Beta Testing?
+<pre>Beta Testing is performed by “real users” of the software application in “real environment” and it can be considered as a form of external User Acceptance Testing. It is the final test before shipping a product to the customers. Direct feedback from customers is a major advantage of Beta Testing. This testing helps to test products in customer’s environment.
+
+Beta version of the software is released to a limited number of end-users of the product to obtain feedback on the product quality. Beta testing reduces product failure risks and provides increased quality of the product through customer validation.</pre>
+<p class="descText"></p>Black box and white box
+<pre>Black Box Testing is a software testing method in which the internal structure/design/implementation of the item being tested is not known to the tester. Only the external design and structure are tested.
+ 
+White Box Testing is a software testing method in which the internal structure/design/implementation of the item being tested is known to the tester. Implementation and impact of the code are tested.</pre>
+
+</p>
+<p class="descText">Techniques of black box testing
+<pre>
+Black Box Testing	
+Equivalence partitioning: Also known as equivalence class partitioning (ECP), this black box testing technique calls for the input values for the application or system to be classified based on outcome similarity.
+
+This enables testing teams to use only one value from within the class or group for analyzing the outcome rather than having to review all the relevant input values from the group. This technique maintains test coverage, and the amount of rework required and time spent are minimized.
+
+For instance, let’s assume a text field that only accepts numerical inputs between 1950 and 2000 to be tested. Using equivalence partitioning, we can create three sets of groups for testing this field: any number less than 1950, any number between 1950 and 2000, and any number greater than 2000.
+
+The valid class will be any one number between 1950 and 2000, while the other two groups will be invalid classes.
+
+In this example, the testing team has reduced the cases to only three, allowing all possible scenarios to be tested within a few moments.
+
+Boundary value analysis: In this technique, the tester focuses on analyzing both valid and invalid values at the boundaries–or the limits at which the system behavior changes. This technique is popular as many applications exhibit bugs when processing boundary values.
+
+Continuing the above example, let’s say a field that accepts values between 1950 and 2000 is being tested. The tester, using boundary value analysis, will enter the following values during testing: 1949 (1950-1), 1950, 1951 (1950+1), 1999 (2000-1), 2000, and 2001 (2000+1). 
+
+Decision table testing: With this method, the tester detects two outputs for two conditions that are defined by a logical connection, such as:
+
+If
+
+{
+
+(Condition = True)
+
+then output1 ;
+
+}
+
+else output2; /*(condition = False)*/
+
+Based on the above example, the tester will create a decision table with all the probable outcomes.
+
+State transition testing: In this technique, the tester analyzes the various states of the application, which change as per events or conditions that the application is subjected to. Each event triggers a state that is then treated as a scenario to be tested.
+
+This technique is handy for simple scenarios, while more complex scenarios will create complicated transition diagrams and make the technique less effective.
+
+Experience-based testing: Guessing the errors that might arise in the application is a key example of this technique. Here, the testing team leverages its experience around the application’s behavior and its functionalities to find the areas prone to errors.
+
+Examples of guessing based on experience include searching for common errors, such as dividing by zero, handling null values in text fields, and accepting blank inputs where they should not be allowed.
+
+Graph-based testing: All applications are created using objects. This method identifies the objects, and an ‘object graph’ is created. This graph is used to identify all object relationships, write test cases, and test for error discovery.
+
+Comparison testing: Finally, in this technique, independent versions of one application are compared to each other during the testing process.
+	</pre>
+</p>
+<p class="descText">Techniques of white box testing
+<pre>
+		The below-listed techniques are used in white box testing:
+		Statement coverage: All statements are at least once executed at the source code level in this white box testing approach. The number of statements executed is recorded.
+		
+		This technique allows the testing team to analyze the source code and set expectations around what it can and cannot do. It is also reliable for checking code quality and verifying path flow. However, one cannot use it to test false conditions.This method tests the internal coding and infrastructure of the software. 
+		
+		Decision coverage: In this technique, decision coverage is given to Boolean values, and Boolean expressions’ true and false results are reported.
+		
+		Control flow statements that create a possibility of two or more outcomes, such as ‘do while’, ‘if’, and ‘case’, are considered as ‘decision points’ in this technique as they can lead to two outcomes: either true or false.
+		
+		This technique covers all the possible results of every Boolean condition within the code through control flow charts and graphs. However, it can sometimes be difficult to achieve complete coverage due to the existence of complicated expressions.
+		
+		Branch coverage: This technique covers all branches of the control flow graph. Each decision point condition’s possible true and false outcomes are covered at least once. This method guarantees that the several branches of each decision point are executed successfully.
+		
+		Numerous methods are available for calculating branch coverage, the most common of which is pathfinding. This method uses the number of executed branch paths to calculate branch coverage. Developers can substitute decision coverage with branch coverage.
+		
+		Condition coverage: In this technique, the testing team analyzes all the conditional expressions in an application for every possible outcome. All the conditions are tested independently, and all the possible results of every condition are tested at least once. Predicate coverage is another name for this technique.
+		
+		Multiple condition coverage: In this technique, all the possible permutations of condition outcomes in every decision, as well as all entry points, are tested at least once. Full multiple condition coverage generally requires a high number of test cases.
+		
+		Path coverage: All program paths are tested in this comprehensive technique. It is leveraged to ensure that every application path is utilized at least once. This technique is generally useful for testing complex programs.
+		
+		Control flow testing: This technique determines the sequence in which an application’s statements or instructions are executed via a control structure. The test cases of the analyzed application are developed using the control structure. Control flow testing is generally used during unit testing.
+		
+		Testers, using this technique, select a specific part of the application for setting the testing path. The control flow graph is created from the edge, node, junction node, and decision node to outline all the possible execution paths.
+		
+		Data flow testing: Finally, white box testers use this technique to analyze the control flow of programs to explore the variable sequence based on the event sequence. During testing, the focus lies on two points: where values are assigned to the variables and where these values are used.
+		
+		In this technique, the control flow graph is used to detect logical inconsistencies that disrupt data flow. Reasons for anomaly detection include variables being used without initialization and initialized variables not being used.
+	</pre>
+</p>
+<p class="descText"></p>
+	Difference between Bug, Defect, and Error.
+<pre>A slip in coding is indicated as an error. The error spotted by a manual tester becomes a defect. The defect which the development team admits is known as a bug. If a built code misses on the requirements, then it is a functional failure.</pre>
+</p>
+
+
+
+{% endblock %}

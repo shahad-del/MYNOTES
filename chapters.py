@@ -33,5 +33,11 @@ def css() -> 'html':
 @app.route('/html')
 def html() -> 'html':
 	return render_template('htmlTricks.html')
+@app.route('/js')
+def js() -> 'html':
+	return render_template('js.html')
+@app.route('/jira')
+def jira() -> 'html':
+	return render_template('jira.html')
 if __name__ == '__main__':
     app.run(debug=True,port=8080)
