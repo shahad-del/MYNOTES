@@ -4,16 +4,28 @@
 {%endblock%}
 {% block body %}
 <p class="desctext">
-	When we want to add  onclick event dynamically in javascript:
-	<pre><code class="javascript">
+	When we want to add onclick event dynamically in javascript:
+<pre><code class="javascript">
 		let span = document.createElement('span');
 		span.addEventListener("click",function name);
 	</code></pre>
-	But when we want to pass parameter to our function:
-	<pre><code class="javascript">
+But when we want to pass parameter to our function:
+<pre><code class="javascript">
 		let span = document.createElement('span');
 		span.addEventListener("click",function(){Delete_item(list_id);});
 		
+	</code></pre>
+</p>
+<p class="desctext">
+	Want to show and hide a element by accessing the class name:
+<pre><code class="javascript">
+		document.getElementsByClassName('btn-pageMenu') delivers a nodeList. You should use: document.getElementsByClassName('btn-pageMenu')[0].style.display (if it's the first element from that list you want to change.
+		If you want to change style.display for all nodes loop through the list:
+
+		var elems = document.getElementsByClassName('btn-pageMenu');
+		for (var i=0;i<elems.length;i+=1){
+  elems[i].style.display = 'block';
+}
 	</code></pre>
 </p>
 {% endblock %}
