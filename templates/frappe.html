@@ -1,0 +1,13 @@
+{% extends 'basis.html' %}
+{% block title %}
+<title>frappe and erpnext</title>
+{% endblock %}
+{% block body %}
+<p class = "descText">
+    When you want to retrieve data from certain doctype in frappe you can run the follwoing command.Here I am making report for bar stock.So new report has been created in erpnext app which automatically creates .js,.py file and .json file in backend. Now I am trying to create a report from backend.Custom script.
+    <pre><code>
+        items = frappe.db.get_all("Item", filters ={"disabled":0,"brand":["not like",""]},fields=["name"])
+
+        This command search into Item doctype and filters out the name(which is the column name in `tabitem` database ) whose brand name is not null.
+    </code></pre>
+</p>
