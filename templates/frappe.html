@@ -11,3 +11,138 @@
         This command search into Item doctype and filters out the name(which is the column name in `tabitem` database ) whose brand name is not null.
     </code></pre>
 </p>
+<div class="descText">
+    This one is .py  file of room status report I have made while learning erpnext.
+    <pre><code lang="python">
+        # Copyright (c) 2023, Tuna Technology and contributors
+        # For license information, please see license.txt
+        
+        import frappe
+        
+        
+        def execute(filters=None):
+            columns, data = [], []
+            columns = get_columns()
+            room_info = get_room_info()
+            
+            for room in room_info:
+                    if not filters and room.status in ["Dirty", "Out of Service", "Available"] :
+                       data.append({
+                            "room_no": room.room_no,
+                            "room_type": room.room_type,
+                            "status": room.status,
+                            "customer": "",
+                        })
+                    
+            room_folio = get_booked_room_info(filters)
+            if room_folio:
+                for i in room_folio:
+                    data.append({
+                        "room_no": i.room_no,
+                        "room_type": i.room_type,
+                        "status": i.status,
+                        "customer": i.customer,
+                        "checkin_date": i.check_in,
+                        "checkout_date": i.check_out,
+                    })
+            return columns,data
+        
+        def get_conditions(filters):
+            conditions= ""
+            if filters.get("from_date"):
+                conditions += f" and check_in >= '{filters['from_date']}'"
+            if filters.get("to_date"):
+                conditions += f" and check_in <= '{filters['to_date']}'"
+            if filters.get("customer_name"):
+                conditions += f" and customer = '{filters['customer_name']}'"
+            if filters.get("room_no"):
+                conditions += f" and room_no = '{filters['room_no']}'"
+            return conditions
+        
+        def get_room_info():
+                return frappe.db.sql("""
+                                      Select room_no,status,room_type from `tabRoom HMS`       
+                              """,as_dict = 1)
+        def get_booked_room_info(filters):
+                conditions = get_conditions(filters)
+                query = frappe.db.sql( """
+                                    Select customer,room_type,check_in,check_out,status,room_no from `tabRoom Folio HMS`
+                    where docstatus = 0 %s """%(conditions),as_dict=1)
+                return query
+        #def get_booked_room_info(room):
+            #To know whether there has been any erro in your syntax try this.
+            # query = """
+            #             SELECT customer, check_in, check_out, status, room_no
+            #             FROM `tabRoom Folio HMS`
+            #             WHERE docstatus = 0 {0}
+            #             """.format(conditions)
+            # frappe.throw(f'SQL query: {query}')
+                #return frappe.db.get_value("Room Folio HMS", {"room_no": room.room_no}, ["customer","status","room_type", "check_in", "check_out"], as_dict=True)
+        
+        def get_columns():
+            columns = [
+                {
+                    "label":"Room No",
+                    "fieldname":"room_no",
+                    "fieldtype":"Link",
+                    "options":"Room HMS",
+                    "width":100
+                },
+                {
+                    "label":"Room Type",
+                    "fieldname":"room_type",
+                    "fieldtype":"Link",
+                       "options":"Room HMS",
+                    "width":100
+                },
+                {
+                    "label":"Room Status",
+                    "fieldname":"status",
+                    "fieldtype":"Link",
+                    "options":"Room HMS",
+                    "width":100
+                },
+                {
+                    "label":"Guest Name",
+                    "fieldname":"customer",
+                    "fieldtype":"Link",
+                    "options":"Customer",
+                    "width":100
+                }
+            ]
+            return columns
+    </code></pre>
+    and this .js fie to apply filters:
+    <pre>
+        <code>
+            frappe.query_reports["Room status"] = {
+                "filters": [
+                    {
+                        "fieldname": "from_date",
+                        "label": __("From Date"),
+                        "fieldtype": "Date",
+                        "width": "80"
+                    },
+                    {
+                        "fieldname": "to_date",
+                        "label": __("To Date"),
+                        "fieldtype": "Date",
+                    },
+                    {
+                        "fieldname": "customer_name",
+                        "label": __("Customer"),
+                        "fieldtype": "Link",
+                        "options": "Customer"
+                    },
+                    {
+                        "fieldname": "room_no",
+                        "label": __("Room number"),
+                        "fieldtype": "Link",
+                        "options": "Room HMS",
+                    },
+            
+                ]};
+            
+        </code>
+    </pre>
+</div>
