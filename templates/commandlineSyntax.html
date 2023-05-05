@@ -138,6 +138,20 @@ git add .
 git commit -m "msg" 
 git push
 </code></pre>
+<p>When you want to fetch the branch of remote repository and push into it:</p>
+<pre>
+    <code>
+        <ol>
+            <li>git config pull.rebase false  </li>
+            <li>git pull upstream new_reports </li>
+            <li>git status</li>
+            <li>git commit -m 'merged' </li>
+            <li>git add</li>
+            <li>git commit </li>
+            <li>git push upstream new_reports </li>
+        </ol>
+    </code>
+</pre>
 <h3>When running postgresql through commandline.Few shortcuts are:</h3>
 <p class = "descText">
 <pre><code lang="SQL">
